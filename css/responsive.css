@@ -12,7 +12,7 @@
 
   /* ── NAV ── */
   .nav-logo  { font-size: 17px; }
-  .nav-pill  { font-size: 8.5px; padding: 5px 10px; }
+  .nav-pill  { font-size: 10px; padding: 5px 10px; }
 
   /* ── TIMELINE ── */
   .timeline         { padding-left: 32px; }
@@ -21,11 +21,11 @@
   .ev-card::before  { left: -26px; top: 16px; }
   .ev-card.sub::before { left: -22px; top: 13px; }
   .ev-row    { gap: 8px; }
-  .ev-time   { font-size: 17px; min-width: 62px; }
-  .ev-time.dash { font-size: 13px; }
-  .ev-title  { font-size: 16px; }
-  .ev-meta-item { font-size: 12px; }
-  .ev-note   { font-size: 12px; padding: 7px 10px; }
+  .ev-time   { font-size: 20px; min-width: 62px; }
+  .ev-time.dash { font-size: 15px; }
+  .ev-title  { font-size: 19px; }
+  .ev-meta-item { font-size: 14px; }
+  .ev-note   { font-size: 14px; padding: 7px 10px; }
 
   /* ── POPUP: bottom sheet ── */
   .overlay { align-items: flex-end; padding-bottom: env(safe-area-inset-bottom); }
@@ -37,7 +37,7 @@
   }
   .overlay.open .popup { transform: translateY(0); }
 
-  .popup-title { font-size: 22px; }
+  .popup-title { font-size: 26px; }
   .popup-head  { padding: 12px 16px 14px; }
   .popup-body  { padding: 14px 16px 18px; }
 

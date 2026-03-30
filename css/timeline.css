@@ -14,9 +14,9 @@
   display: flex; align-items: center; gap: 9px;
   box-shadow: 0 4px 16px rgba(182,139,64,.3);
 }
-.section-hdr-inner i    { color:#fff; font-size:18px; }
-.section-hdr-inner span { font-family:'Cormorant Garamond',serif; font-size:22px; letter-spacing:3px; text-transform:uppercase; color:#fff; font-weight:500; }
-.section-time { text-align:center; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin:8px 0 36px; }
+.section-hdr-inner i    { color:#fff; font-size:20px; }
+.section-hdr-inner span { font-family:'Cormorant Garamond',serif; font-size:26px; letter-spacing:3px; text-transform:uppercase; color:#fff; font-weight:500; }
+.section-time { text-align:center; font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin:8px 0 36px; }
 
 /* ── TIMELINE ── */
 .timeline { position: relative; padding-left: 48px; }
@@ -77,36 +77,36 @@
 
 /* ─ BADGES ─ */
 .important-badge {
-  display: inline-flex; align-items: center; gap: 5px;
+  display: inline-flex; align-items: center; gap: 6px;
   background: var(--burg-grad);
-  color:#fff; font-size:10px; letter-spacing:2px; text-transform:uppercase;
-  padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; font-weight:700;
+  color:#fff; font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+  padding: 5px 12px; border-radius: 20px; margin-bottom: 10px; font-weight:700;
   box-shadow: 0 2px 8px rgba(139,58,58,.25);
 }
-.important-badge i { font-size:8px; }
+.important-badge i { font-size:10px; }
 .music-badge {
-  display: inline-flex; align-items: center; gap: 5px;
+  display: inline-flex; align-items: center; gap: 6px;
   background: var(--gold-grad);
-  color:#fff; font-size:10px; letter-spacing:2px; text-transform:uppercase;
-  padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; font-weight:700;
+  color:#fff; font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+  padding: 5px 12px; border-radius: 20px; margin-bottom: 10px; font-weight:700;
   box-shadow: 0 2px 8px rgba(182,139,64,.3);
 }
 
 /* Card layout */
 .ev-row       { display:flex; align-items:flex-start; gap:12px; }
-.ev-time      { display:flex; align-items:center; gap:4px; font-size:19px; font-weight:700; color:var(--burg); letter-spacing:.3px; white-space:nowrap; min-width:72px; flex-shrink:0; }
-.ev-time i    { font-size:15px; opacity:.7; }
-.ev-time.dash { color:var(--muted); font-weight:300; font-size:14px; letter-spacing:.5px; }
-.ev-ampm      { font-size:9px; font-weight:400; letter-spacing:1px; opacity:.75; margin-left:1px; align-self:flex-start; margin-top:5px; }
+.ev-time      { display:flex; align-items:center; gap:4px; font-size:22px; font-weight:700; color:var(--burg); letter-spacing:.3px; white-space:nowrap; min-width:78px; flex-shrink:0; }
+.ev-time i    { font-size:17px; opacity:.7; }
+.ev-time.dash { color:var(--muted); font-weight:300; font-size:16px; letter-spacing:.5px; }
+.ev-ampm      { font-size:11px; font-weight:400; letter-spacing:1px; opacity:.75; margin-left:1px; align-self:flex-start; margin-top:6px; }
 .ev-body      { flex:1; min-width:0; }
-.ev-title     { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; color:var(--gold); line-height:1.25; margin-bottom:4px; }
-.ev-card.sub .ev-title       { font-size:16px; color:var(--text); font-weight:500; }
-.ev-card.highlight .ev-title { color:var(--burg); font-size:19px; }
-.ev-meta      { display:flex; flex-wrap:wrap; gap:4px 12px; margin-top:4px; }
-.ev-meta-item { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--muted); }
-.ev-meta-item i { color:var(--burg); font-size:12px; width:12px; text-align:center; }
-.ev-note      { margin-top:10px; background:var(--gold-pale); border-left:3px solid var(--gold); border-radius:0 8px 8px 0; padding:8px 12px; font-size:13px; color:var(--muted); font-style:italic; line-height:1.5; }
-.ev-note i    { color:var(--gold); margin-right:4px; }
+.ev-title     { font-family:'Cormorant Garamond',serif; font-size:21px; font-weight:600; color:var(--gold); line-height:1.25; margin-bottom:5px; }
+.ev-card.sub .ev-title       { font-size:18px; color:var(--text); font-weight:500; }
+.ev-card.highlight .ev-title { color:var(--burg); font-size:22px; }
+.ev-meta      { display:flex; flex-wrap:wrap; gap:5px 12px; margin-top:5px; }
+.ev-meta-item { display:flex; align-items:center; gap:7px; font-size:15px; color:var(--muted); }
+.ev-meta-item i { color:var(--burg); font-size:14px; width:14px; text-align:center; }
+.ev-note      { margin-top:10px; background:var(--gold-pale); border-left:3px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 14px; font-size:15px; color:var(--muted); font-style:italic; line-height:1.55; }
+.ev-note i    { color:var(--gold); margin-right:5px; }
 
 /* Playlist hint strip */
 .ev-card.has-playlist .ev-body::after {
@@ -120,20 +120,20 @@
 
 /* Chip contador de canciones (reemplaza al botón en la tarjeta) */
 .song-count-chip {
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-top: 10px; padding: 5px 12px;
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 12px; padding: 7px 14px;
   background: var(--gold-pale); border: 1px solid rgba(182,139,64,.25);
-  border-radius: 20px; font-size: 11px; letter-spacing: 1px;
+  border-radius: 20px; font-size: 13px; letter-spacing: .5px;
   color: var(--gold); font-family: 'Lato', sans-serif;
-  pointer-events: none; /* el clic lo maneja la tarjeta */
+  pointer-events: none;
 }
-.song-count-chip i { font-size: 11px; }
+.song-count-chip i { font-size: 13px; }
 
 /* ── TOGGLE SUB ── */
 .toggle-sub {
   display: inline-flex; align-items: center; gap: 8px;
   margin-top: 10px; color: var(--gold);
-  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  font-size: 13px; letter-spacing: 1px; text-transform: uppercase;
   border: none; background: none; font-family: 'Lato',sans-serif;
   transition: color .2s; padding: 10px 0; min-height: var(--touch);
   cursor: pointer;

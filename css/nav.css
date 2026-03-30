@@ -30,7 +30,7 @@
   border: 1.5px solid rgba(182,139,64,.25);
   color: var(--muted);
   padding: 5px 12px; min-height: 34px;
-  border-radius: 30px; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  border-radius: 30px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
   cursor: pointer; transition: all .22s; white-space: nowrap; flex-shrink: 0;
   display: inline-flex; align-items: center; font-family:'Lato',sans-serif;
   scroll-snap-align: start;
@@ -45,4 +45,4 @@
 .nav-progress svg { transform:rotate(-90deg); width:34px; height:34px; }
 .nav-progress circle { fill:none; stroke:rgba(182,139,64,.18); stroke-width:3; }
 .nav-progress .prog  { fill:none; stroke:var(--gold); stroke-width:3; stroke-linecap:round; transition:stroke-dashoffset .25s linear; }
-.nav-progress span   { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:7px; font-weight:700; color:var(--gold); }
+.nav-progress span   { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:9px; font-weight:700; color:var(--gold); }

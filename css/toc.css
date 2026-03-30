@@ -44,15 +44,15 @@
 .toc-panel.open { opacity:1; pointer-events:all; transform:scale(1) translateY(0); }
 
 .toc-head { padding:14px 16px; background:var(--gold-grad); flex-shrink:0; }
-.toc-head-title { color:#fff; font-family:'Cormorant Garamond',serif; font-size:15px; font-weight:600; margin-bottom:2px; }
-.toc-head-sub   { color:rgba(255,255,255,.72); font-size:9px; letter-spacing:2px; text-transform:uppercase; }
+.toc-head-title { color:#fff; font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:600; margin-bottom:2px; }
+.toc-head-sub   { color:rgba(255,255,255,.72); font-size:11px; letter-spacing:2px; text-transform:uppercase; }
 
 .toc-sections { overflow-y:auto; flex:1; padding:6px 0; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
 .toc-sections::-webkit-scrollbar       { width:3px; }
 .toc-sections::-webkit-scrollbar-thumb { background:rgba(182,139,64,.25); border-radius:3px; }
 
 .toc-section-label {
-  padding: 8px 14px 4px; font-size:9px; letter-spacing:3px; text-transform:uppercase;
+  padding: 8px 14px 4px; font-size:11px; letter-spacing:3px; text-transform:uppercase;
   color:var(--gold); font-weight:700; display:flex; align-items:center; gap:6px;
 }
 .toc-section-label::after { content:''; flex:1; height:1px; background:rgba(182,139,64,.18); }
@@ -70,7 +70,7 @@
 .toc-item:hover .toc-dot        { background:var(--gold); }
 .toc-item.is-important .toc-dot { background:var(--burg); }
 
-.toc-item-name   { flex:1; line-height:1.35; font-size:13px; color:var(--text); }
+.toc-item-name   { flex:1; line-height:1.35; font-size:15px; color:var(--text); }
 .toc-item.is-important .toc-item-name { color:var(--burg); font-weight:600; }
-.toc-time-badge  { font-size:11px; color:var(--muted); font-weight:700; background:rgba(182,139,64,.1); padding:2px 8px; border-radius:10px; flex-shrink:0; white-space:nowrap; }
+.toc-time-badge  { font-size:13px; color:var(--muted); font-weight:700; background:rgba(182,139,64,.1); padding:2px 8px; border-radius:10px; flex-shrink:0; white-space:nowrap; }
 .toc-item.is-important .toc-time-badge { background:rgba(139,58,58,.1); color:var(--burg); }
