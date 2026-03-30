@@ -374,9 +374,19 @@ body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);ove
   .ev-row{flex-direction:column;gap:5px}
   .ev-time{min-width:unset}
   .nav-logo{font-size:17px}
-  .toc-panel{width:360px}
+  .toc-panel{width:min(360px,calc(100vw - 24px))}
   .fab-wrap{bottom:20px;right:18px}
   .toast{bottom:16px;font-size:15px}
+  /* Popup como bottom-sheet en móvil */
+  .overlay{padding:0;align-items:flex-end}
+  .popup{max-width:100%;border-radius:22px 22px 0 0;max-height:92vh;
+    transform:scale(1) translateY(40px)}
+  .overlay.open .popup{transform:scale(1) translateY(0)}
+  .popup-head{padding:16px 18px 14px}
+  .popup-title{font-size:28px}
+  .popup-body{padding:12px 18px 32px;-webkit-overflow-scrolling:touch}
+  .popup-actions{flex-direction:column;gap:8px}
+  .btn-add-song,.btn-save{flex:unset;width:100%}
 }
 @media print{
   #particles,#top-bar,.sticky-nav,.fab-wrap,.toast,.overlay{display:none!important}
