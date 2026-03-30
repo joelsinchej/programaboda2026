@@ -1,59 +1,51 @@
 // ════════════════════════════════
-//  TOGGLE SUB-LISTS (desfile procesión)
+//  APP — init, reveal, toggle-sub, toast
+//  Requiere: jQuery, popup.js, nav.js, toc.js
 // ════════════════════════════════
-function toggleSub(id, btn) {
-  const el    = document.getElementById(id);
-  const icon  = btn.querySelector('.toggle-sub-icon i');
-  const label = btn.querySelector('span');
-  el.classList.toggle('open');
-  if (el.classList.contains('open')) {
-    icon.className   = 'fa-solid fa-chevron-up';
-    label.textContent = 'Ocultar desfile de ingreso';
-  } else {
-    icon.className   = 'fa-solid fa-chevron-down';
-    label.textContent = 'Ver desfile de ingreso — 9 momentos';
-  }
-}
 
-// ════════════════════════════════
-//  INTERSECTION OBSERVER (card reveal)
-// ════════════════════════════════
-const revealObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      revealObs.unobserve(e.target);
+$(function () {
+
+  /* ─── Card reveal con IntersectionObserver ─── */
+  const obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        $(e.target).addClass('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+
+  $('.ev-card').each(function(i) {
+    this.style.transitionDelay = (i % 5) * 0.05 + 's';
+    obs.observe(this);
+  });
+
+  /* ─── Toggle sub-lista procesión ─── */
+  $(document).on('click', '.toggle-sub', function(e) {
+    e.stopPropagation(); // evitar que abra el detalle de la tarjeta padre
+    const $btn  = $(this);
+    const id    = $btn.data('target');
+    const $list = $('#' + id);
+    const $icon = $btn.find('.toggle-sub-icon i');
+
+    $list.toggleClass('open');
+    if ($list.hasClass('open')) {
+      $icon.attr('class', 'fa-solid fa-chevron-up');
+      $btn.find('span').text('Ocultar desfile de ingreso');
+    } else {
+      $icon.attr('class', 'fa-solid fa-chevron-down');
+      $btn.find('span').text('Ver desfile de ingreso — 9 momentos');
     }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
 
-document.querySelectorAll('.ev-card').forEach((c, i) => {
-  c.style.transitionDelay = (i % 5) * 0.055 + 's';
-  revealObs.observe(c);
+  /* ─── Toast ─── */
+  window.showToast = function(msg) {
+    const $t = $('#toast');
+    $('#toastMsg').text(msg);
+    $t.addClass('show');
+    setTimeout(function() { $t.removeClass('show'); }, 3200);
+  };
+
+  /* ─── Init ─── */
+  updateCounts();
 });
-
-// ════════════════════════════════
-//  TOAST
-// ════════════════════════════════
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  document.getElementById('toastMsg').textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3200);
-}
-
-// ════════════════════════════════
-//  KEYBOARD
-// ════════════════════════════════
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closePopup();
-    if (tocOpen) toggleToc();
-  }
-});
-
-// ════════════════════════════════
-//  INIT
-// ════════════════════════════════
-updateCounts();
-buildToc();

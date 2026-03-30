@@ -1,93 +1,64 @@
-/* ══ RESPONSIVE — MOBILE FIRST ══
-   Todos los ajustes para pantallas ≤ 640px
-   ══════════════════════════════════════ */
+/* ══ RESPONSIVE — MOBILE FIRST ══ */
 
-@media (max-width: 640px) {
-
-  /* ── HERO ── */
-  .hero-badge { font-size: 14px; letter-spacing: 3px; padding: 6px 16px; }
-  .hero-sub   { font-size: 22px; }
-
-  /* ── NAV ── */
-  .nav-logo   { font-size: 17px; }
-  .nav-pill   { padding: 6px 10px; font-size: 9px; min-height: 38px; }
-
-  /* ── TIMELINE ── */
-  .timeline         { padding-left: 36px; }
-  .timeline::before { left: 12px; }
-  .ev-card::before  { left: -28px; }
-  .ev-card.sub::before { left: -24px; }
-  .ev-row    { flex-direction: column; gap: 5px; }
-  .ev-time   { min-width: unset; }
-  .ev-title  { font-size: 17px; }
-  .ev-meta-item { font-size: 13px; }
-  .ev-note   { font-size: 13px; }
-
-  /* ── SONG BUTTON ── */
-  .btn-songs { width: 100%; justify-content: center; margin-top: 12px; }
-
-  /* ── TOGGLE SUB ── */
-  .toggle-sub { width: 100%; justify-content: flex-start; }
-
-  /* ── POPUP como bottom-sheet ── */
-  .overlay {
-    padding: 0;
-    align-items: flex-end;
-    /* Soporte para el área segura (notch/home bar en iPhone) */
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  .popup {
-    max-width: 100%;
-    border-radius: 24px 24px 0 0;
-    max-height: 92vh;
-    /* Deja espacio extra para el área segura inferior */
-    padding-bottom: env(safe-area-inset-bottom);
-    transform: scale(1) translateY(100%);
-  }
+/* Tablet y desktop: popup centrado */
+@media (min-width: 641px) {
+  .overlay { align-items: center; padding: 24px; }
+  .popup   { border-radius: var(--radius-pop); max-height: 86vh; transform: scale(.94) translateY(16px); }
   .overlay.open .popup { transform: scale(1) translateY(0); }
-
-  /* Handle visual (pastilla arriba del popup) */
-  .popup::before {
-    content: '';
-    display: block;
-    width: 40px; height: 4px;
-    background: rgba(182,139,64,.25);
-    border-radius: 2px;
-    margin: 10px auto 0;
-    flex-shrink: 0;
-  }
-
-  .popup-head  { padding: 10px 20px 14px; }
-  .popup-title { font-size: 26px; }
-  .popup-close { width: 44px; height: 44px; font-size: 16px; }
-  .popup-body  { padding: 10px 20px 24px; }
-
-  /* Botones apilados verticalmente */
-  .popup-actions  { flex-direction: column; gap: 10px; }
-  .btn-add-song,
-  .btn-save       { flex: unset; width: 100%; padding: 14px; font-size: 11px; }
-
-  /* ── FAB + TOC ── */
-  .fab-wrap  { bottom: calc(20px + env(safe-area-inset-bottom)); right: 18px; }
-  .toc-panel { width: min(360px, calc(100vw - 24px)); max-height: 65vh; }
-
-  /* ── TOAST ── */
-  .toast {
-    bottom: calc(16px + env(safe-area-inset-bottom));
-    font-size: 13px;
-    max-width: calc(100vw - 32px);
-    white-space: normal;
-    text-align: center;
-  }
-
-  /* ── FOOTER ── */
-  .footer-names { font-size: 28px; }
-  .footer-verse { font-size: 15px; }
 }
 
-/* ── Print ── */
+/* Mobile ≤ 640px */
+@media (max-width: 640px) {
+
+  /* ── NAV ── */
+  .nav-logo  { font-size: 17px; }
+  .nav-pill  { font-size: 8.5px; padding: 5px 10px; }
+
+  /* ── TIMELINE ── */
+  .timeline         { padding-left: 32px; }
+  .timeline::before { left: 10px; }
+  .ev-card          { padding: 14px 16px 13px; margin-bottom: 10px; }
+  .ev-card::before  { left: -26px; top: 16px; }
+  .ev-card.sub::before { left: -22px; top: 13px; }
+  .ev-row    { gap: 8px; }
+  .ev-time   { font-size: 17px; min-width: 62px; }
+  .ev-time.dash { font-size: 13px; }
+  .ev-title  { font-size: 16px; }
+  .ev-meta-item { font-size: 12px; }
+  .ev-note   { font-size: 12px; padding: 7px 10px; }
+
+  /* ── POPUP: bottom sheet ── */
+  .overlay { align-items: flex-end; padding-bottom: env(safe-area-inset-bottom); }
+  .popup   {
+    max-width: 100%; max-height: 92svh;
+    border-radius: 24px 24px 0 0;
+    transform: translateY(100%);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .overlay.open .popup { transform: translateY(0); }
+
+  .popup-title { font-size: 22px; }
+  .popup-head  { padding: 12px 16px 14px; }
+  .popup-body  { padding: 14px 16px 18px; }
+
+  /* Actions stacked */
+  .popup-actions   { flex-direction: column; gap: 8px; }
+  .btn-add-song,
+  .btn-save        { flex: unset; width: 100%; padding: 14px; }
+
+  /* ── FAB ── */
+  .fab-wrap { bottom: calc(20px + env(safe-area-inset-bottom)); right: 16px; }
+
+  /* ── TOAST ── */
+  .toast { bottom: calc(14px + env(safe-area-inset-bottom)); font-size: 12px; max-width: calc(100vw - 28px); }
+
+  /* ── FOOTER ── */
+  .footer { padding: 44px 20px 44px; }
+}
+
+/* ── PRINT ── */
 @media print {
-  #particles, #top-bar, .sticky-nav, .fab-wrap, .toast, .overlay { display: none !important; }
-  .ev-card  { opacity: 1 !important; transform: none !important; break-inside: avoid; }
-  .sub-list { max-height: unset !important; }
+  #particles, #top-bar, .sticky-nav, .fab-wrap, .toast, .overlay { display:none !important; }
+  .ev-card  { opacity:1 !important; transform:none !important; break-inside:avoid; }
+  .sub-list { max-height:unset !important; }
 }
