@@ -31,7 +31,7 @@
   <div class="hero-divider"></div>
   <div class="hero-date">✦ &nbsp; Sábado 25 de Abril, 2026 &nbsp; ✦</div>
   <div class="hero-sub">Con todo nuestro amor, les damos la bienvenida.</div>
-  <div class="hero-scroll" onclick="document.querySelector('.sticky-nav').scrollIntoView({behavior:'smooth'})">
+  <div class="hero-scroll" onclick="$('.sticky-nav')[0].scrollIntoView({behavior:'smooth'})">
     <div class="scroll-line"></div>
   </div>
 </section>
@@ -71,7 +71,7 @@
 
   <div class="timeline">
 
-    <!-- 1.1 Ingreso al local -->
+    <!-- 1.1 Ingreso -->
     <div class="ev-card" id="sec-ingreso">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="ev-row">
@@ -101,7 +101,7 @@
       </div>
     </div>
 
-    <!-- 1.3 Inicio ceremonial + procesión -->
+    <!-- 1.3 Procesión -->
     <div class="ev-card" id="sec-procesion">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="ev-row">
@@ -111,7 +111,7 @@
           <div class="ev-meta">
             <div class="ev-meta-item"><i class="fa-solid fa-user-tie"></i> Cyndi &amp; Adrian — Maestros de Ceremonia</div>
           </div>
-          <button class="toggle-sub" onclick="toggleSub('procesion', this)">
+          <button class="toggle-sub" data-target="procesion">
             <div class="toggle-sub-icon"><i class="fa-solid fa-chevron-down"></i></div>
             <span>Ver desfile de ingreso — 9 momentos</span>
           </button>
@@ -194,7 +194,6 @@
               </div>
             </div>
 
-            <!-- IMPORTANTE: Novia -->
             <div class="ev-card sub highlight">
               <div class="important-badge"><i class="fa-solid fa-star"></i> Momento Especial</div>
               <div class="ev-row">
@@ -234,7 +233,7 @@
       </div>
     </div>
 
-    <!-- VOTOS — IMPORTANTE -->
+    <!-- VOTOS -->
     <div class="ev-card highlight" id="sec-votos">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="important-badge"><i class="fa-solid fa-heart"></i> Momento Principal</div>
@@ -258,7 +257,7 @@
       </div>
     </div>
 
-    <!-- BESO — IMPORTANTE -->
+    <!-- BESO -->
     <div class="ev-card highlight">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="important-badge"><i class="fa-solid fa-star"></i> Momento Principal</div>
@@ -309,12 +308,12 @@
 
   </div><!-- /timeline ceremonia -->
 
-  <div style="text-align:center;margin:48px 0;color:var(--gold);letter-spacing:12px;font-size:14px">✦ &nbsp; ✦ &nbsp; ✦</div>
+  <div style="text-align:center;margin:44px 0;color:var(--gold);letter-spacing:12px;font-size:13px">✦ &nbsp; ✦ &nbsp; ✦</div>
 
   <!-- ═══ II. RECEPCIÓN ═══ -->
   <div class="section-hdr" style="margin-top:0">
     <div class="section-hdr-line"></div>
-    <div class="section-hdr-inner" style="background:var(--burgundy)"><i class="fa-solid fa-champagne-glasses"></i><span>Recepción</span></div>
+    <div class="section-hdr-inner" style="background:var(--burg-grad)"><i class="fa-solid fa-champagne-glasses"></i><span>Recepción</span></div>
     <div class="section-hdr-line r"></div>
   </div>
   <div class="section-time">6:07 PM — 11:00 PM</div>
@@ -322,7 +321,7 @@
   <div class="timeline">
 
     <!-- DJ Bloque 1 -->
-    <div class="ev-card has-playlist" id="sec-recepcion" onclick="openSongs('dj1')">
+    <div class="ev-card has-playlist" id="sec-recepcion" data-block="dj1">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="music-badge"><i class="fa-solid fa-compact-disc"></i> DJ en Vivo</div>
       <div class="ev-row">
@@ -330,10 +329,7 @@
         <div class="ev-body">
           <div class="ev-title">Ambientación Musical de Bienvenida — DJ</div>
           <div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-compact-disc"></i> DJ — Selección Musical Bloque 1</div></div>
-          <div class="btn-songs">
-            <i class="fa-solid fa-list-music"></i> Playlist Bloque 1
-            <span class="song-count" id="count-dj1">0</span>
-          </div>
+          <div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Playlist · <span id="count-dj1">0</span> canciones</div>
         </div>
       </div>
     </div>
@@ -361,7 +357,7 @@
       </div>
     </div>
 
-    <!-- VALS — IMPORTANTE -->
+    <!-- VALS -->
     <div class="ev-card highlight">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="important-badge"><i class="fa-solid fa-heart"></i> Momento Principal</div>
@@ -374,7 +370,7 @@
       </div>
     </div>
 
-    <!-- Presentación padres / padrinos -->
+    <!-- Presentación padres -->
     <div class="ev-card">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="ev-row">
@@ -433,7 +429,7 @@
     </div>
 
     <!-- BANQUETE + DJ 2 -->
-    <div class="ev-card has-playlist" id="sec-banquete" onclick="openSongs('dj2')">
+    <div class="ev-card has-playlist" id="sec-banquete" data-block="dj2">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="music-badge"><i class="fa-solid fa-compact-disc"></i> DJ en Vivo</div>
       <div class="ev-row">
@@ -444,10 +440,7 @@
             <div class="ev-meta-item"><i class="fa-solid fa-utensils"></i> Servicio de cena para todos los invitados</div>
             <div class="ev-meta-item"><i class="fa-solid fa-compact-disc"></i> DJ — Selección Musical Bloque 2</div>
           </div>
-          <div class="btn-songs">
-            <i class="fa-solid fa-list-music"></i> Playlist Bloque 2
-            <span class="song-count" id="count-dj2">0</span>
-          </div>
+          <div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Playlist · <span id="count-dj2">0</span> canciones</div>
         </div>
       </div>
     </div>
@@ -465,7 +458,7 @@
     </div>
 
     <!-- Orquesta Bloque 1 -->
-    <div class="ev-card has-playlist" onclick="openSongs('orq1')">
+    <div class="ev-card has-playlist" data-block="orq1">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="music-badge"><i class="fa-solid fa-music"></i> Orquesta en Vivo</div>
       <div class="ev-row">
@@ -476,10 +469,7 @@
             <div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band</div>
             <div class="ev-meta-item"><i class="fa-solid fa-user"></i> Coordinación: Isaac</div>
           </div>
-          <div class="btn-songs">
-            <i class="fa-solid fa-list-music"></i> Lista de Canciones
-            <span class="song-count" id="count-orq1">0</span>
-          </div>
+          <div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Lista · <span id="count-orq1">0</span> canciones</div>
         </div>
       </div>
     </div>
@@ -496,7 +486,7 @@
       </div>
     </div>
 
-    <!-- CANCIÓN SORPRESA — IMPORTANTE -->
+    <!-- CANCIÓN SORPRESA -->
     <div class="ev-card highlight">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="important-badge"><i class="fa-solid fa-star"></i> Sorpresa Especial</div>
@@ -527,7 +517,7 @@
     </div>
 
     <!-- Orquesta Bloque 2 -->
-    <div class="ev-card has-playlist" onclick="openSongs('orq2')">
+    <div class="ev-card has-playlist" data-block="orq2">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="music-badge"><i class="fa-solid fa-music"></i> Orquesta en Vivo</div>
       <div class="ev-row">
@@ -538,15 +528,12 @@
             <div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band</div>
             <div class="ev-meta-item"><i class="fa-solid fa-user"></i> Coordinación: Isaac</div>
           </div>
-          <div class="btn-songs">
-            <i class="fa-solid fa-list-music"></i> Lista de Canciones
-            <span class="song-count" id="count-orq2">0</span>
-          </div>
+          <div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Lista · <span id="count-orq2">0</span> canciones</div>
         </div>
       </div>
     </div>
 
-    <!-- BAILE SORPRESA ESPOSOS — IMPORTANTE -->
+    <!-- BAILE SORPRESA ESPOSOS -->
     <div class="ev-card highlight">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="important-badge"><i class="fa-solid fa-heart"></i> Momento Principal</div>
@@ -562,8 +549,8 @@
       </div>
     </div>
 
-    <!-- HORA LOCA — IMPORTANTE -->
-    <div class="ev-card highlight has-playlist" id="sec-horaloca" onclick="openSongs('djhl')">
+    <!-- HORA LOCA -->
+    <div class="ev-card highlight has-playlist" id="sec-horaloca" data-block="djhl">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="important-badge"><i class="fa-solid fa-fire"></i> ¡La Fiesta!</div>
       <div class="ev-row">
@@ -574,10 +561,7 @@
             <div class="ev-meta-item"><i class="fa-solid fa-star"></i> Jimena · Carnaval Perú Producciones</div>
             <div class="ev-meta-item"><i class="fa-solid fa-compact-disc"></i> DJ Mix Especial</div>
           </div>
-          <div class="btn-songs">
-            <i class="fa-solid fa-list-music"></i> Playlist Hora Loca
-            <span class="song-count" id="count-djhl">0</span>
-          </div>
+          <div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Playlist · <span id="count-djhl">0</span> canciones</div>
         </div>
       </div>
     </div>
@@ -596,7 +580,7 @@
     </div>
 
     <!-- Orquesta Bloque 3 -->
-    <div class="ev-card has-playlist" onclick="openSongs('orq3')">
+    <div class="ev-card has-playlist" data-block="orq3">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="music-badge"><i class="fa-solid fa-music"></i> Orquesta en Vivo</div>
       <div class="ev-row">
@@ -607,10 +591,7 @@
             <div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band</div>
             <div class="ev-meta-item"><i class="fa-solid fa-user"></i> Coordinación: Isaac</div>
           </div>
-          <div class="btn-songs">
-            <i class="fa-solid fa-list-music"></i> Lista de Canciones
-            <span class="song-count" id="count-orq3">0</span>
-          </div>
+          <div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Lista · <span id="count-orq3">0</span> canciones</div>
         </div>
       </div>
     </div>
@@ -638,29 +619,65 @@
   <div class="footer-orn" style="font-size:11px;letter-spacing:6px">✦ &nbsp; ✦ &nbsp; ✦</div>
 </footer>
 
-<!-- ══ POPUP ══ -->
-<div class="overlay" id="popupOverlay" onclick="closeOnBg(event)">
+<!-- ══ POPUP UNIFICADO (detalle + canciones) ══ -->
+<div class="overlay" id="popupOverlay">
   <div class="popup" id="popup">
-    <div class="popup-head">
-      <div>
-        <div class="popup-title" id="popupTitle"></div>
-        <div class="popup-sub"   id="popupSub"></div>
-      </div>
-      <button class="popup-close" onclick="closePopup()" aria-label="Cerrar">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-    <div class="popup-body">
-      <ul class="song-list" id="songList"></ul>
-      <div class="popup-actions">
-        <button class="btn-add-song" id="btnAddSong">
-          <i class="fa-solid fa-plus"></i> Agregar canción
-        </button>
-        <button class="btn-save" onclick="saveSongs()">
-          <i class="fa-solid fa-floppy-disk"></i> Guardar
+    <div class="popup-handle"></div>
+
+    <!-- ▸ VISTA: DETALLE DEL EVENTO -->
+    <div id="viewDetail" class="popup-view">
+      <div class="popup-head" id="detailHead">
+        <div class="popup-head-content">
+          <div class="popup-badge-wrap" id="detailBadge"></div>
+          <div class="popup-title" id="detailTitle"></div>
+          <div class="popup-time-label" id="detailTime"></div>
+        </div>
+        <button class="popup-close" id="btnClose" aria-label="Cerrar">
+          <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
+      <div class="popup-body">
+        <div class="detail-meta-list" id="detailMeta"></div>
+        <div id="detailNoteWrap"></div>
+        <button class="btn-open-playlist" id="btnOpenPlaylist" style="display:none">
+          <div class="btn-open-playlist-icon"><i class="fa-solid fa-list-music"></i></div>
+          <div class="btn-open-playlist-label">
+            <strong>Ver / Editar Playlist</strong>
+            <span id="playlistBlockLabel"></span>
+          </div>
+          <span class="btn-open-playlist-badge" id="playlistCount">0</span>
+          <i class="fa-solid fa-chevron-right btn-open-playlist-arrow"></i>
+        </button>
+      </div>
     </div>
+
+    <!-- ▸ VISTA: CANCIONES -->
+    <div id="viewSongs" class="popup-view" style="display:none">
+      <div class="popup-head popup-head--songs">
+        <button class="btn-back" id="btnBack" aria-label="Volver">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="popup-head-content" style="text-align:center">
+          <div class="popup-title" id="songsTitle"></div>
+          <div class="popup-sub-label" id="songsSub"></div>
+        </div>
+        <button class="popup-close" id="btnCloseSongs" aria-label="Cerrar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="popup-body">
+        <ul class="song-list" id="songList"></ul>
+        <div class="popup-actions">
+          <button class="btn-add-song" id="btnAddSong">
+            <i class="fa-solid fa-plus"></i> Agregar
+          </button>
+          <button class="btn-save" id="btnSave">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -673,7 +690,7 @@
     </div>
     <div class="toc-sections" id="tocList"></div>
   </div>
-  <button class="fab" id="fab" onclick="toggleToc()" title="Índice del programa" aria-label="Abrir índice">
+  <button class="fab" id="fab" aria-label="Abrir índice">
     <div class="fab-icon-stack">
       <div class="fab-line fab-line-1"></div>
       <div class="fab-line fab-line-2"></div>
@@ -688,9 +705,10 @@
   <span id="toastMsg"></span>
 </div>
 
-<!-- ══ SCRIPTS (orden de dependencias) ══ -->
+<!-- ══ SCRIPTS ══ -->
+<script src="js/jquery.min.js"></script>
 <script src="js/data.js"></script>
-<script src="js/songs.js"></script>
+<script src="js/popup.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/toc.js"></script>
 <script src="js/particles.js"></script>

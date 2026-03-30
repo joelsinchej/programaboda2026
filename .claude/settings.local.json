@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh pr:*)",
+      "Bash(git -C \"C:\\\\Users\\\\Joel\\\\Documents\\\\GitHub\\\\programaboda2026\\\\.claude\\\\worktrees\\\\focused-cartwright\" status)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
