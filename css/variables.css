@@ -1,0 +1,18 @@
+/* ══ CSS CUSTOM PROPERTIES ══ */
+:root {
+  --gold: #B68B40;
+  --gold-light: #D4A85A;
+  --gold-pale: #F7EDDA;
+  --gold-glow: rgba(182,139,64,.28);
+  --burgundy: #8B3A3A;
+  --burg-light: #B05050;
+  --cream: #FDFAF4;
+  --cream2: #F5EFE0;
+  --white: #FFFFFF;
+  --text: #2C2C2C;
+  --muted: #8A7E6E;
+  --shadow: 0 4px 24px rgba(182,139,64,.15);
+  --shadow-lg: 0 12px 48px rgba(182,139,64,.24);
+  --nav-h: 64px;
+  --touch-min: 44px; /* mínimo área táctil recomendado por Apple/Google */
+}
