@@ -138,6 +138,15 @@
 .ev-card.highlight .nav-pointer { background: var(--burgundy); box-shadow: 0 0 0 4px rgba(139,58,58,.25); }
 .ev-card.spotlit .nav-pointer   { display: flex; }
 
+/* ── TARJETA CON PLAYLIST CLICKEABLE ── */
+.ev-card.has-playlist {
+  cursor: pointer;
+}
+.ev-card.has-playlist:active {
+  transform: scale(.985);
+  box-shadow: var(--shadow);
+}
+
 /* ── SONG BUTTON ── */
 .btn-songs {
   display: inline-flex; align-items: center; gap: 7px;

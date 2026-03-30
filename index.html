@@ -322,7 +322,7 @@
   <div class="timeline">
 
     <!-- DJ Bloque 1 -->
-    <div class="ev-card" id="sec-recepcion">
+    <div class="ev-card has-playlist" id="sec-recepcion" onclick="openSongs('dj1')">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="music-badge"><i class="fa-solid fa-compact-disc"></i> DJ en Vivo</div>
       <div class="ev-row">
@@ -330,10 +330,10 @@
         <div class="ev-body">
           <div class="ev-title">Ambientación Musical de Bienvenida — DJ</div>
           <div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-compact-disc"></i> DJ — Selección Musical Bloque 1</div></div>
-          <button class="btn-songs" onclick="openSongs('dj1')">
+          <div class="btn-songs">
             <i class="fa-solid fa-list-music"></i> Playlist Bloque 1
             <span class="song-count" id="count-dj1">0</span>
-          </button>
+          </div>
         </div>
       </div>
     </div>
@@ -433,7 +433,7 @@
     </div>
 
     <!-- BANQUETE + DJ 2 -->
-    <div class="ev-card" id="sec-banquete">
+    <div class="ev-card has-playlist" id="sec-banquete" onclick="openSongs('dj2')">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="music-badge"><i class="fa-solid fa-compact-disc"></i> DJ en Vivo</div>
       <div class="ev-row">
@@ -444,10 +444,10 @@
             <div class="ev-meta-item"><i class="fa-solid fa-utensils"></i> Servicio de cena para todos los invitados</div>
             <div class="ev-meta-item"><i class="fa-solid fa-compact-disc"></i> DJ — Selección Musical Bloque 2</div>
           </div>
-          <button class="btn-songs" onclick="openSongs('dj2')">
+          <div class="btn-songs">
             <i class="fa-solid fa-list-music"></i> Playlist Bloque 2
             <span class="song-count" id="count-dj2">0</span>
-          </button>
+          </div>
         </div>
       </div>
     </div>
@@ -465,7 +465,7 @@
     </div>
 
     <!-- Orquesta Bloque 1 -->
-    <div class="ev-card">
+    <div class="ev-card has-playlist" onclick="openSongs('orq1')">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="music-badge"><i class="fa-solid fa-music"></i> Orquesta en Vivo</div>
       <div class="ev-row">
@@ -476,10 +476,10 @@
             <div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band</div>
             <div class="ev-meta-item"><i class="fa-solid fa-user"></i> Coordinación: Isaac</div>
           </div>
-          <button class="btn-songs" onclick="openSongs('orq1')">
+          <div class="btn-songs">
             <i class="fa-solid fa-list-music"></i> Lista de Canciones
             <span class="song-count" id="count-orq1">0</span>
-          </button>
+          </div>
         </div>
       </div>
     </div>
@@ -527,7 +527,7 @@
     </div>
 
     <!-- Orquesta Bloque 2 -->
-    <div class="ev-card">
+    <div class="ev-card has-playlist" onclick="openSongs('orq2')">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="music-badge"><i class="fa-solid fa-music"></i> Orquesta en Vivo</div>
       <div class="ev-row">
@@ -538,10 +538,10 @@
             <div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band</div>
             <div class="ev-meta-item"><i class="fa-solid fa-user"></i> Coordinación: Isaac</div>
           </div>
-          <button class="btn-songs" onclick="openSongs('orq2')">
+          <div class="btn-songs">
             <i class="fa-solid fa-list-music"></i> Lista de Canciones
             <span class="song-count" id="count-orq2">0</span>
-          </button>
+          </div>
         </div>
       </div>
     </div>
@@ -563,7 +563,7 @@
     </div>
 
     <!-- HORA LOCA — IMPORTANTE -->
-    <div class="ev-card highlight" id="sec-horaloca">
+    <div class="ev-card highlight has-playlist" id="sec-horaloca" onclick="openSongs('djhl')">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="important-badge"><i class="fa-solid fa-fire"></i> ¡La Fiesta!</div>
       <div class="ev-row">
@@ -574,10 +574,10 @@
             <div class="ev-meta-item"><i class="fa-solid fa-star"></i> Jimena · Carnaval Perú Producciones</div>
             <div class="ev-meta-item"><i class="fa-solid fa-compact-disc"></i> DJ Mix Especial</div>
           </div>
-          <button class="btn-songs" onclick="openSongs('djhl')">
+          <div class="btn-songs">
             <i class="fa-solid fa-list-music"></i> Playlist Hora Loca
             <span class="song-count" id="count-djhl">0</span>
-          </button>
+          </div>
         </div>
       </div>
     </div>
@@ -596,7 +596,7 @@
     </div>
 
     <!-- Orquesta Bloque 3 -->
-    <div class="ev-card">
+    <div class="ev-card has-playlist" onclick="openSongs('orq3')">
       <div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div>
       <div class="music-badge"><i class="fa-solid fa-music"></i> Orquesta en Vivo</div>
       <div class="ev-row">
@@ -607,10 +607,10 @@
             <div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band</div>
             <div class="ev-meta-item"><i class="fa-solid fa-user"></i> Coordinación: Isaac</div>
           </div>
-          <button class="btn-songs" onclick="openSongs('orq3')">
+          <div class="btn-songs">
             <i class="fa-solid fa-list-music"></i> Lista de Canciones
             <span class="song-count" id="count-orq3">0</span>
-          </button>
+          </div>
         </div>
       </div>
     </div>
