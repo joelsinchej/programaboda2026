@@ -37,11 +37,11 @@ body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);ove
 .hero-names{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,14vw,120px);
   font-weight:300;line-height:.95;animation:fadeUp .9s .15s ease both}
 .hero-names .first{display:block;color:var(--gold);letter-spacing:-1px}
-.hero-names .amp{font-style:italic;color:var(--muted);font-size:.5em;display:block;margin:6px 0}
+.hero-names .amp{font-style:italic;color:var(--muted);font-size:1.9em;display:block;margin:6px 0}
 .hero-names .second{display:block;color:var(--burgundy);letter-spacing:-1px}
 .hero-divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:28px auto;animation:fadeUp .9s .35s ease both}
-.hero-date{margin-top:0;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--muted);animation:fadeUp .9s .3s ease both}
-.hero-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:var(--burgundy);margin-top:10px;animation:fadeUp .9s .4s ease both}
+.hero-date{margin-top:0;font-size:20px;letter-spacing:5px;text-transform:uppercase;color:var(--muted);animation:fadeUp .9s .3s ease both}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:30px;color:var(--burgundy);margin-top:10px;animation:fadeUp .9s .4s ease both}
 .hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:8px;
   color:var(--muted);font-size:10px;letter-spacing:3px;text-transform:uppercase;
@@ -316,7 +316,7 @@ body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);ove
 .toc-item.is-important .toc-dot{background:var(--burgundy)}
 .toc-item-name{flex:1;line-height:1.3}
 .toc-time-badge{
-  font-size:9.5px;color:var(--muted);font-weight:700;letter-spacing:.5px;
+  font-size:15.5px;color:var(--muted);font-weight:700;letter-spacing:.5px;
   background:rgba(182,139,64,.1);padding:2px 7px;border-radius:10px;flex-shrink:0;white-space:nowrap;
 }
 .toc-item.is-important .toc-time-badge{background:rgba(139,58,58,.1);color:var(--burgundy)}
@@ -402,8 +402,6 @@ body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);ove
   <div class="hero-date">✦ &nbsp; Sábado 25 de Abril, 2026 &nbsp; ✦</div>
   <div class="hero-sub">Con todo nuestro amor, les damos la bienvenida.</div>
   <div class="hero-scroll" onclick="document.querySelector('.sticky-nav').scrollIntoView({behavior:'smooth'})">
-    <div class="scroll-line"></div>
-    <span>Descubrir</span>
   </div>
 </section>
 
@@ -1045,7 +1043,6 @@ body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);ove
       <div class="fab-line fab-line-2"></div>
       <div class="fab-line fab-line-3"></div>
     </div>
-    <div class="fab-label">Índice</div>
   </button>
 </div>
 
