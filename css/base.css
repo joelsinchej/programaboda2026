@@ -1,0 +1,121 @@
+/* ══ RESET & BASE ══ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* Elimina el delay de 300ms en todos los botones/links en móvil */
+button, a, [role="button"], input, label {
+  touch-action: manipulation;
+}
+
+/* ── PARTICLES ── */
+#particles {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; opacity: .5;
+}
+
+/* ── PROGRESS BAR ── */
+#top-bar {
+  position: fixed; top: 0; left: 0; z-index: 400;
+  height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--burgundy));
+  border-radius: 0 2px 2px 0;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 40px 20px;
+  position: relative; z-index: 1;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(182,139,64,.08) 0, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,58,58,.06) 0, transparent 55%);
+}
+.hero-badge {
+  font-size: 20px; letter-spacing: 6px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(182,139,64,.4);
+  padding: 7px 22px; border-radius: 40px; margin-bottom: 32px;
+  display: inline-flex; align-items: center; gap: 10px;
+  animation: fadeDown .8s ease both;
+}
+.hero-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(60px, 14vw, 120px);
+  font-weight: 300; line-height: .95;
+  animation: fadeUp .9s .15s ease both;
+}
+.hero-names .first  { display: block; color: var(--gold); letter-spacing: -1px; }
+.hero-names .amp    { font-style: italic; color: var(--muted); font-size: 1.9em; display: block; margin: 6px 0; }
+.hero-names .second { display: block; color: var(--burgundy); letter-spacing: -1px; }
+.hero-divider {
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 28px auto; animation: fadeUp .9s .35s ease both;
+}
+.hero-date {
+  margin-top: 0; font-size: 13px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--muted); animation: fadeUp .9s .3s ease both;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 30px; color: var(--burgundy); margin-top: 10px;
+  animation: fadeUp .9s .4s ease both;
+}
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--muted); font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  animation: fadeUp 1s .9s ease both; cursor: pointer;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(var(--gold), transparent);
+  animation: scrollPulse 2s infinite;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center; padding: 60px 20px 50px;
+  border-top: 1px solid rgba(182,139,64,.2);
+  margin-top: 40px; position: relative; z-index: 1;
+}
+.footer-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; font-weight: 300; color: var(--gold);
+  letter-spacing: 2px; margin-bottom: 6px;
+}
+.footer-names em { font-style: italic; color: var(--burgundy); }
+.footer-verse {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 17px; color: var(--burgundy); margin: 20px 0 6px; line-height: 1.7;
+}
+.footer-ref   { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+.footer-orn   { color: var(--gold); letter-spacing: 10px; margin: 14px 0; }
+.footer-msg   { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 2000; background: var(--text); color: #fff;
+  padding: 11px 20px; border-radius: 12px; font-size: 12px;
+  letter-spacing: .5px; display: flex; align-items: center; gap: 9px;
+  opacity: 0; pointer-events: none;
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 8px 24px rgba(0,0,0,.22); white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast i { color: var(--gold); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown  { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeUp    { from{opacity:0;transform:translateY(16px)}  to{opacity:1;transform:translateY(0)} }
+@keyframes fadeSlide { from{opacity:0;transform:translateX(-8px)}  to{opacity:1;transform:translateX(0)} }
+@keyframes scrollPulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:.4;transform:scaleY(.7)} }

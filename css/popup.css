@@ -1,0 +1,107 @@
+/* ══ SONGS POPUP ══ */
+.overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(28,18,8,.58); backdrop-filter: blur(7px);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.overlay.open { opacity: 1; pointer-events: all; }
+
+.popup {
+  background: var(--white); border-radius: 22px;
+  max-width: 520px; width: 100%; max-height: 86vh;
+  overflow: hidden; display: flex; flex-direction: column;
+  box-shadow: 0 28px 80px rgba(0,0,0,.24), 0 0 0 1px rgba(182,139,64,.2);
+  transform: scale(.93) translateY(18px);
+  transition: transform .38s cubic-bezier(.34,1.56,.64,1);
+}
+.overlay.open .popup { transform: scale(1) translateY(0); }
+
+.popup-head {
+  padding: 22px 26px 18px;
+  border-bottom: 1px solid rgba(182,139,64,.15);
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 12px; flex-shrink: 0;
+}
+.popup-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px; font-weight: 600; color: var(--gold); line-height: 1.2;
+}
+.popup-sub {
+  font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); margin-top: 4px;
+}
+.popup-close {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1.5px solid rgba(182,139,64,.3);
+  background: transparent; color: var(--muted); font-size: 15px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all .2s; flex-shrink: 0;
+}
+.popup-close:hover, .popup-close:active { background: var(--burgundy); border-color: var(--burgundy); color: #fff; }
+
+.popup-body {
+  padding: 18px 26px 26px; overflow-y: auto; flex: 1;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.popup-body::-webkit-scrollbar       { width: 4px; }
+.popup-body::-webkit-scrollbar-thumb { background: rgba(182,139,64,.3); border-radius: 4px; }
+
+/* Song list */
+.song-list { list-style: none; }
+.song-item {
+  display: flex; align-items: center; gap: 11px; padding: 10px 0;
+  border-bottom: 1px solid rgba(182,139,64,.1);
+  animation: fadeSlide .32s ease both;
+}
+.song-item:last-child { border-bottom: none; }
+.song-num {
+  width: 28px; height: 28px; border-radius: 50%; background: var(--gold-pale);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: var(--gold); flex-shrink: 0;
+}
+.song-input {
+  flex: 1; border: none; background: transparent;
+  font-family: 'Lato', sans-serif; font-size: 14px; color: var(--text);
+  outline: none; padding: 4px 6px; border-radius: 4px;
+  transition: background .2s;
+  /* iOS fix: evitar zoom automático en inputs (font-size >= 16px) */
+  font-size: max(16px, 13px);
+}
+.song-input:focus { background: var(--gold-pale); }
+.song-input::placeholder { color: rgba(138,126,110,.45); font-style: italic; }
+
+/* Botón eliminar — área táctil mínima 44px */
+.song-del {
+  width: 44px; height: 44px;
+  border: none; background: transparent; color: rgba(139,58,58,.4);
+  cursor: pointer; border-radius: 50%; font-size: 13px;
+  transition: all .2s;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.song-del:hover, .song-del:active { background: rgba(139,58,58,.1); color: var(--burgundy); }
+
+.popup-actions { display: flex; gap: 10px; margin-top: 16px; }
+.btn-add-song {
+  flex: 1; border: 1.5px dashed rgba(182,139,64,.4); background: transparent;
+  color: var(--gold); padding: 12px; border-radius: 9px;
+  font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; transition: all .25s; font-family: 'Lato', sans-serif;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: var(--touch-min);
+}
+.btn-add-song:hover, .btn-add-song:active { background: var(--gold-pale); border-color: var(--gold); }
+.btn-save {
+  flex: 1; background: var(--gold); border: none; color: #fff;
+  padding: 12px; border-radius: 9px;
+  font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; transition: all .25s; font-family: 'Lato', sans-serif;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: var(--touch-min);
+}
+.btn-save:hover, .btn-save:active { background: var(--gold-light); }
+
+.empty-songs { text-align: center; padding: 30px 20px; color: var(--muted); font-style: italic; font-size: 14px; }
+.empty-songs i { display: block; font-size: 30px; color: rgba(182,139,64,.3); margin-bottom: 10px; }
