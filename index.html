@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#B68B40">
+<title>Joel &amp; Lucero — 25 de Abril 2026</title>
+
+<!-- Google Fonts + Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<style>
+/* ==================== DESIGN TOKENS ==================== */
+:root {
+  --gold:        #B68B40;
+  --gold-light:  #D4A85A;
+  --gold-pale:   #F7EDDA;
+  --gold-glow:   rgba(182,139,64,.28);
+  --gold-grad:   linear-gradient(135deg,#B68B40,#9A7030);
+  --burg:        #8B3A3A;
+  --burg-light:  #B05050;
+  --burg-grad:   linear-gradient(135deg,#8B3A3A,#B05050);
+  --cream:       #FDFAF4;
+  --cream2:      #F5EFE0;
+  --white:       #FFFFFF;
+  --text:        #2C2C2C;
+  --muted:       #8A7E6E;
+  --shadow-sm:   0 2px 12px rgba(182,139,64,.12);
+  --shadow-md:   0 4px 24px rgba(182,139,64,.18);
+  --shadow-lg:   0 12px 48px rgba(182,139,64,.24);
+  --shadow-pop:  0 24px 80px rgba(0,0,0,.22), 0 0 0 1px rgba(182,139,64,.18);
+  --nav-h:       60px;
+  --touch:       48px;
+  --radius-card: 16px;
+  --radius-pop:  28px;
+}
+
+/* ==================== RESET & BASE ==================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a, button, [role="button"], label, input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* PARTICLES CANVAS */
+#particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .45; }
+
+/* TOP PROGRESS BAR */
+#top-bar {
+  position: fixed; top: 0; left: 0; z-index: 500;
+  height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--burg));
+  border-radius: 0 2px 2px 0;
+  transition: width .1s linear;
+}
+
+/* HERO */
+.hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 48px 24px 80px;
+  position: relative; z-index: 1;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(182,139,64,.09) 0, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(139,58,58,.07) 0, transparent 55%);
+}
+.hero-badge {
+  font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(182,139,64,.35);
+  padding: 8px 20px; border-radius: 40px; margin-bottom: 36px;
+  display: inline-flex; align-items: center; gap: 10px;
+  animation: fadeDown .8s ease both;
+  backdrop-filter: blur(4px);
+  background: rgba(253,250,244,.6);
+}
+.hero-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(64px, 18vw, 120px);
+  font-weight: 300; line-height: .92;
+  animation: fadeUp .9s .15s ease both;
+}
+.hero-names .first  { display: block; color: var(--gold); letter-spacing: -1px; }
+.hero-names .amp    { font-style: italic; color: var(--muted); font-size: .55em; display: block; margin: 8px 0; }
+.hero-names .second { display: block; color: var(--burg); letter-spacing: -1px; }
+.hero-divider {
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 28px auto; animation: fadeUp .9s .3s ease both;
+}
+.hero-date {
+  font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--muted); animation: fadeUp .9s .35s ease both;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(18px, 5vw, 26px); color: var(--burg);
+  margin-top: 12px; animation: fadeUp .9s .4s ease both;
+  line-height: 1.4;
+}
+.hero-scroll {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--muted); font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  animation: fadeUp 1s .9s ease both; cursor: pointer;
+}
+.scroll-line {
+  width: 1px; height: 36px;
+  background: linear-gradient(var(--gold), transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center; padding: 56px 24px 56px;
+  border-top: 1px solid rgba(182,139,64,.18);
+  margin-top: 40px; position: relative; z-index: 1;
+}
+.footer-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 8vw, 42px); font-weight: 300;
+  color: var(--gold); letter-spacing: 2px; margin-bottom: 8px;
+}
+.footer-names em    { font-style: italic; color: var(--burg); }
+.footer-verse       { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(15px,4vw,18px); color: var(--burg); margin: 20px auto 6px; line-height: 1.7; max-width: 420px; }
+.footer-ref         { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+.footer-orn         { color: var(--gold); letter-spacing: 10px; margin: 12px 0; }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 3000; background: #1C1208; color: #fff;
+  padding: 12px 22px; border-radius: 14px;
+  font-size: 13px; letter-spacing: .3px;
+  display: flex; align-items: center; gap: 10px;
+  opacity: 0; pointer-events: none;
+  transition: all .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 8px 28px rgba(0,0,0,.25);
+  white-space: nowrap; max-width: calc(100vw - 32px);
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast i    { color: var(--gold); font-size: 15px; }
+
+/* RIPPLE */
+.ripple-dot {
+  position: absolute; border-radius: 50%;
+  background: rgba(182,139,64,.22);
+  transform: scale(0); pointer-events: none;
+  animation: rippleOut .55s ease-out forwards;
+}
+
+/* ANIMATIONS */
+@keyframes fadeDown    { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeUp      { from{opacity:0;transform:translateY(18px)}  to{opacity:1;transform:translateY(0)} }
+@keyframes fadeSlide   { from{opacity:0;transform:translateX(-10px)} to{opacity:1;transform:translateX(0)} }
+@keyframes scrollPulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:.35;transform:scaleY(.65)} }
+@keyframes rippleOut   { to{transform:scale(4);opacity:0} }
+@keyframes popIn       { from{opacity:0;transform:scale(.96) translateY(8px)} to{opacity:1;transform:scale(1) translateY(0)} }
+
+/* ==================== STICKY NAV ==================== */
+.sticky-nav {
+  position: sticky; top: 0; z-index: 200;
+  height: var(--nav-h);
+  background: rgba(253,250,244,.92);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid rgba(182,139,64,.15);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 16px; gap: 8px;
+  transition: box-shadow .3s;
+}
+.sticky-nav.scrolled { box-shadow: var(--shadow-md); }
+.nav-logo { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:300; color:var(--gold); letter-spacing:1px; white-space:nowrap; flex-shrink:0; }
+.nav-logo em { font-style:italic; color:var(--burg); }
+.nav-pills {
+  display: flex; gap: 4px; flex: 1;
+  overflow-x: auto; scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding: 4px 0;
+}
+.nav-pills::-webkit-scrollbar { display:none; }
+.nav-pill {
+  background: transparent;
+  border: 1.5px solid rgba(182,139,64,.25);
+  color: var(--muted);
+  padding: 5px 12px; min-height: 34px;
+  border-radius: 30px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  cursor: pointer; transition: all .22s; white-space: nowrap; flex-shrink: 0;
+  display: inline-flex; align-items: center; font-family:'Lato',sans-serif;
+  scroll-snap-align: start;
+}
+.nav-pill:hover, .nav-pill.active {
+  background: var(--gold); border-color: var(--gold); color: #fff;
+  box-shadow: 0 2px 10px rgba(182,139,64,.35);
+}
+.nav-progress { width:34px; height:34px; border-radius:50%; position:relative; flex-shrink:0; }
+.nav-progress svg { transform:rotate(-90deg); width:34px; height:34px; }
+.nav-progress circle { fill:none; stroke:rgba(182,139,64,.18); stroke-width:3; }
+.nav-progress .prog  { fill:none; stroke:var(--gold); stroke-width:3; stroke-linecap:round; transition:stroke-dashoffset .25s linear; }
+.nav-progress span   { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:9px; font-weight:700; color:var(--gold); }
+
+/* ==================== MAIN CONTENT ==================== */
+.main {
+  position: relative; z-index: 1;
+  max-width: 860px; margin: 0 auto;
+  padding: 48px 16px 100px;
+}
+.section-hdr { display: flex; align-items: center; margin: 56px 0 6px; }
+.section-hdr-line   { flex: 1; height: 1px; background: linear-gradient(90deg,transparent,var(--gold)); }
+.section-hdr-line.r { background: linear-gradient(270deg,transparent,var(--gold)); }
+.section-hdr-inner  {
+  padding: 9px 20px; background: var(--gold-grad); border-radius: 6px;
+  display: flex; align-items: center; gap: 9px;
+  box-shadow: 0 4px 16px rgba(182,139,64,.3);
+}
+.section-hdr-inner i    { color:#fff; font-size:20px; }
+.section-hdr-inner span { font-family:'Cormorant Garamond',serif; font-size:26px; letter-spacing:3px; text-transform:uppercase; color:#fff; font-weight:500; }
+.section-time { text-align:center; font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin:8px 0 36px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 48px; }
+.timeline::before {
+  content:''; position:absolute; left:16px; top:0; bottom:0; width:2px;
+  background: linear-gradient(180deg,var(--gold-pale),var(--gold) 25%,var(--gold) 75%,var(--gold-pale));
+}
+.ev-card {
+  position: relative; background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 18px 20px 16px; margin-bottom: 12px;
+  border: 1px solid rgba(182,139,64,.12);
+  box-shadow: var(--shadow-sm);
+  opacity: 0; transform: translateX(-12px);
+  transition: opacity .45s ease, transform .45s ease, box-shadow .25s, border-color .25s, background .25s;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+}
+.ev-card.visible { opacity: 1; transform: translateX(0); }
+.ev-card:hover   { box-shadow: var(--shadow-md); border-color: rgba(182,139,64,.28); }
+.ev-card:active  { transform: scale(.985); box-shadow: var(--shadow-sm); }
+.ev-card.sub {
+  background: var(--cream); box-shadow: none;
+  border-color: rgba(182,139,64,.08);
+  padding: 12px 16px; margin-bottom: 8px;
+  cursor: default;
+}
+.ev-card.sub:active { transform: none; }
+.ev-card.sub:hover  { box-shadow: var(--shadow-sm); border-color: rgba(182,139,64,.2); }
+.ev-card.highlight {
+  border-color: rgba(139,58,58,.28);
+  background: linear-gradient(135deg,#fff 55%,rgba(139,58,58,.035));
+}
+.ev-card.highlight::after {
+  content:''; position:absolute; left:0; top:0; bottom:0; width:4px;
+  background: var(--burg-grad); border-radius: var(--radius-card) 0 0 var(--radius-card);
+}
+.ev-card::before {
+  content:''; position:absolute; left:-38px; top:18px;
+  width:12px; height:12px; border-radius:50%;
+  background: var(--gold); border: 3px solid var(--cream);
+  box-shadow: 0 0 0 2px var(--gold), 0 0 10px var(--gold-glow);
+  transition: transform .25s;
+}
+.ev-card:hover::before       { transform: scale(1.3); }
+.ev-card.highlight::before   { background: var(--burg); box-shadow: 0 0 0 2px var(--burg), 0 0 10px rgba(139,58,58,.3); }
+.ev-card.sub::before         { width:7px; height:7px; left:-33px; top:14px; background: var(--cream2); box-shadow: 0 0 0 2px rgba(182,139,64,.4); }
+
+.important-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--burg-grad);
+  color:#fff; font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+  padding: 5px 12px; border-radius: 20px; margin-bottom: 10px; font-weight:700;
+  box-shadow: 0 2px 8px rgba(139,58,58,.25);
+}
+.music-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--gold-grad);
+  color:#fff; font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+  padding: 5px 12px; border-radius: 20px; margin-bottom: 10px; font-weight:700;
+  box-shadow: 0 2px 8px rgba(182,139,64,.3);
+}
+.ev-row       { display:flex; align-items:flex-start; gap:12px; }
+.ev-time      { display:flex; align-items:center; gap:4px; font-size:22px; font-weight:700; color:var(--burg); letter-spacing:.3px; white-space:nowrap; min-width:78px; flex-shrink:0; }
+.ev-time i    { font-size:17px; opacity:.7; }
+.ev-time.dash { color:var(--muted); font-weight:300; font-size:16px; letter-spacing:.5px; }
+.ev-ampm      { font-size:11px; font-weight:400; letter-spacing:1px; opacity:.75; margin-left:1px; align-self:flex-start; margin-top:6px; }
+.ev-body      { flex:1; min-width:0; }
+.ev-title     { font-family:'Cormorant Garamond',serif; font-size:21px; font-weight:600; color:var(--gold); line-height:1.25; margin-bottom:5px; }
+.ev-card.sub .ev-title       { font-size:18px; color:var(--text); font-weight:500; }
+.ev-card.highlight .ev-title { color:var(--burg); font-size:22px; }
+.ev-meta      { display:flex; flex-wrap:wrap; gap:5px 12px; margin-top:5px; }
+.ev-meta-item { display:flex; align-items:center; gap:7px; font-size:15px; color:var(--muted); }
+.ev-meta-item i { color:var(--burg); font-size:14px; width:14px; text-align:center; }
+.ev-note      { margin-top:10px; background:var(--gold-pale); border-left:3px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 14px; font-size:15px; color:var(--muted); font-style:italic; line-height:1.55; }
+.song-count-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 12px; padding: 7px 14px;
+  background: var(--gold-pale); border: 1px solid rgba(182,139,64,.25);
+  border-radius: 20px; font-size: 13px; letter-spacing: .5px;
+  color: var(--gold); font-family: 'Lato', sans-serif;
+  pointer-events: none;
+}
+.toggle-sub {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 10px; color: var(--gold);
+  font-size: 13px; letter-spacing: 1px; text-transform: uppercase;
+  border: none; background: none; font-family: 'Lato',sans-serif;
+  transition: color .2s; padding: 10px 0; min-height: var(--touch);
+  cursor: pointer;
+}
+.toggle-sub:hover    { color: var(--gold-light); }
+.toggle-sub-icon     { width:26px; height:26px; border-radius:50%; border:1.5px solid var(--gold); display:flex; align-items:center; justify-content:center; font-size:9px; transition:all .25s; flex-shrink:0; }
+.toggle-sub:hover .toggle-sub-icon { background:var(--gold); color:#fff; }
+.sub-list      { overflow:hidden; max-height:0; transition:max-height .55s cubic-bezier(.4,0,.2,1); }
+.sub-list.open { max-height:1500px; margin-top:10px; }
+
+/* SPOTLIGHT */
+@keyframes spotlight {
+  0%   { box-shadow:0 0 0 0 rgba(182,139,64,0),var(--shadow-sm);  background:var(--white); }
+  15%  { box-shadow:0 0 0 6px rgba(182,139,64,.35),0 0 60px rgba(182,139,64,.18); background:rgba(247,237,218,.55); }
+  40%  { box-shadow:0 0 0 8px rgba(182,139,64,.25),0 0 80px rgba(182,139,64,.12); }
+  100% { box-shadow:var(--shadow-sm); background:var(--white); }
+}
+@keyframes spotlightHL {
+  0%   { box-shadow:0 0 0 0 rgba(139,58,58,0); }
+  15%  { box-shadow:0 0 0 6px rgba(139,58,58,.35),0 0 60px rgba(139,58,58,.18); background:rgba(139,58,58,.07); }
+  100% { background:linear-gradient(135deg,#fff 55%,rgba(139,58,58,.035)); }
+}
+.ev-card.spotlit           { animation: spotlight 2.2s ease forwards; }
+.ev-card.highlight.spotlit { animation: spotlightHL 2.2s ease forwards; }
+.nav-pointer { position:absolute; left:-38px; top:50%; transform:translateY(-50%); width:20px; height:20px; border-radius:50%; background:var(--gold); color:#fff; font-size:8px; display:none; align-items:center; justify-content:center; box-shadow:0 0 0 4px rgba(182,139,64,.25); animation:pointerSlide 2.2s ease forwards; pointer-events:none; }
+@keyframes pointerSlide { 0%{opacity:0;left:-28px} 30%{opacity:1;left:-22px} 70%{opacity:1;left:-22px} 100%{opacity:0;left:-28px} }
+.ev-card.highlight .nav-pointer { background:var(--burg); box-shadow:0 0 0 4px rgba(139,58,58,.25); }
+.ev-card.spotlit .nav-pointer   { display:flex; }
+
+/* POPUP OVERLAY */
+.overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(20,12,4,.55);
+  backdrop-filter: blur(6px) saturate(1.2);
+  -webkit-backdrop-filter: blur(6px) saturate(1.2);
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 0;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+.overlay.open { opacity: 1; pointer-events: all; }
+.popup {
+  background: var(--white);
+  border-radius: var(--radius-pop) var(--radius-pop) 0 0;
+  width: 100%; max-width: 540px; max-height: 92svh;
+  display: flex; flex-direction: column;
+  box-shadow: var(--shadow-pop);
+  transform: translateY(100%);
+  transition: transform .42s cubic-bezier(.32,1,.56,1);
+  position: relative; overflow: hidden;
+}
+.overlay.open .popup { transform: translateY(0); }
+.popup-handle { width: 36px; height: 4px; border-radius: 2px; background: rgba(182,139,64,.25); margin: 12px auto 0; flex-shrink: 0; }
+.popup-view { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
+.popup-head { padding: 14px 20px 16px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-shrink: 0; border-bottom: 1px solid rgba(182,139,64,.12); }
+.popup-head--gold { background: var(--gold-grad); border-bottom: none; }
+.popup-head--gold .popup-title, .popup-head--gold .popup-time-label { color: #fff; }
+.popup-head--burg { background: var(--burg-grad); border-bottom: none; }
+.popup-head--burg .popup-title, .popup-head--burg .popup-time-label { color: #fff; }
+.popup-head--songs { background: var(--gold-grad); border-bottom: none; align-items: center; }
+.popup-close, .btn-back { width: var(--touch); height: var(--touch); border-radius: 50%; border: 1.5px solid rgba(182,139,64,.3); background: transparent; color: var(--muted); font-size: 15px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+.popup-head--gold .popup-close, .popup-head--burg .popup-close { border-color: rgba(255,255,255,.35); color: rgba(255,255,255,.85); }
+.btn-back { border-color: rgba(255,255,255,.35); color: rgba(255,255,255,.85); }
+.popup-head-content { flex: 1; min-width: 0; }
+.popup-badge-wrap { margin-bottom: 6px; }
+.popup-title { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 600; color: var(--gold); line-height: 1.2; }
+.popup-time-label { font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+.popup-body { padding: 16px 20px 20px; overflow-y: auto; flex: 1; overscroll-behavior: contain; }
+.detail-meta-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(182,139,64,.08); font-size: 16px; }
+.detail-meta-item i { width: 36px; height: 36px; border-radius: 50%; background: var(--gold-pale); color: var(--burg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.detail-note { margin-top: 14px; background: var(--gold-pale); border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; padding: 12px 16px; font-style: italic; }
+.btn-open-playlist { width: 100%; margin-top: 14px; display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--gold-pale); border: 1.5px solid rgba(182,139,64,.35); border-radius: 12px; cursor: pointer; }
+.song-list { list-style: none; }
+.song-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(182,139,64,.09); }
+.song-num { width: 28px; height: 28px; border-radius: 50%; background: var(--gold-pale); color: var(--gold); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.song-input { flex: 1; border: none; background: transparent; font-family: 'Lato', sans-serif; color: var(--text); outline: none; font-size: 16px; padding: 4px 6px; }
+.song-del { width: var(--touch); height: var(--touch); border: none; background: transparent; color: rgba(139,58,58,.4); cursor: pointer; border-radius: 50%; font-size: 13px; }
+.empty-songs { text-align: center; padding: 36px 20px; color: var(--muted); font-style: italic; }
+.popup-actions { display: flex; gap: 10px; margin-top: 14px; }
+.btn-add-song, .btn-save { flex: 1; padding: 13px 10px; border-radius: 10px; font-size: 13px; text-transform: uppercase; cursor: pointer; text-align: center; }
+.btn-add-song { border: 1.5px dashed rgba(182,139,64,.4); background: transparent; color: var(--gold); }
+.btn-save { background: var(--gold-grad); border: none; color: #fff; box-shadow: 0 4px 14px rgba(182,139,64,.35); }
+
+/* TOC + FAB */
+.fab-wrap { position: fixed; bottom: 28px; right: 22px; z-index: 300; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.fab { width: 56px; height: 56px; border-radius: 17px; background: var(--gold-grad); border: none; color: #fff; cursor: pointer; box-shadow: 0 6px 22px rgba(182,139,64,.5); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; transition: transform .28s cubic-bezier(.34,1.56,.64,1); }
+.fab-icon-stack { position:relative; width:20px; height:16px; }
+.fab-line { position:absolute; left:0; height:2px; background:#fff; border-radius:2px; transition:all .3s; }
+.fab-line-1 { width:20px; top:0; }
+.fab-line-2 { width:14px; top:7px; }
+.fab-line-3 { width:18px; top:14px; }
+.fab.open .fab-line-1 { width:20px; top:7px; transform:rotate(45deg); }
+.fab.open .fab-line-2 { width:0; opacity:0; }
+.fab.open .fab-line-3 { width:20px; top:7px; transform:rotate(-45deg); }
+.toc-panel { background: var(--white); border-radius: 18px; width: min(360px, calc(100vw - 32px)); box-shadow: 0 16px 56px rgba(0,0,0,.18); overflow: hidden; transform: scale(.88) translateY(14px); opacity: 0; pointer-events: none; transition: all .32s cubic-bezier(.34,1.56,.64,1); max-height: 68svh; display: flex; flex-direction: column; }
+.toc-panel.open { opacity:1; pointer-events:all; transform:scale(1) translateY(0); }
+.toc-head { padding:14px 16px; background:var(--gold-grad); flex-shrink:0; }
+.toc-head-title { color:#fff; font-family:'Cormorant Garamond',serif; font-size:17px; }
+.toc-head-sub { color:rgba(255,255,255,.72); font-size:11px; letter-spacing:2px; }
+.toc-sections { overflow-y:auto; flex:1; padding:6px 0; }
+.toc-section-label { padding: 8px 14px 4px; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); font-weight:700; display:flex; gap:6px; }
+.toc-item { display:flex; align-items:center; gap:10px; padding: 10px 14px; min-height: var(--touch); cursor:pointer; transition:background .15s; }
+.toc-item:hover { background:var(--gold-pale); }
+.toc-dot { width:7px; height:7px; border-radius:50%; background:rgba(182,139,64,.28); flex-shrink:0; }
+.toc-item-name { flex:1; font-size:15px; }
+.toc-time-badge { font-size:13px; color:var(--muted); background:rgba(182,139,64,.1); padding:2px 8px; border-radius:10px; }
+
+/* RESPONSIVE */
+@media (min-width: 641px) {
+  .overlay { align-items: center; padding: 24px; }
+  .popup { border-radius: var(--radius-pop); max-height: 86vh; transform: scale(.94) translateY(16px); }
+  .overlay.open .popup { transform: scale(1) translateY(0); }
+}
+@media (max-width: 640px) {
+  .timeline { padding-left: 32px; }
+  .timeline::before { left: 10px; }
+  .ev-card::before { left: -26px; }
+  .ev-card.sub::before { left: -22px; }
+  .ev-time { font-size: 20px; min-width: 62px; }
+  .popup-title { font-size: 26px; }
+  .popup-actions { flex-direction: column; }
+}
+@media print {
+  #particles, #top-bar, .sticky-nav, .fab-wrap, .toast, .overlay { display:none; }
+  .ev-card { opacity:1 !important; transform:none !important; break-inside:avoid; }
+}
+</style>
+</head>
+<body>
+
+<div id="top-bar"></div>
+<canvas id="particles"></canvas>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-badge">✦ <span>Programa Boda</span> ✦</div>
+  <div class="hero-names">
+    <span class="first">Joel</span>
+    <span class="amp">&amp;</span>
+    <span class="second">Lucero</span>
+  </div>
+  <div class="hero-divider"></div>
+  <div class="hero-date">✦ &nbsp; Sábado 25 de Abril, 2026 &nbsp; ✦</div>
+  <div class="hero-sub">Con todo nuestro amor, les damos la bienvenida.</div>
+  <div class="hero-scroll" onclick="$('.sticky-nav')[0].scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav" id="mainNav">
+  <div class="nav-logo">J <em>&amp;</em> L</div>
+  <div class="nav-pills" id="navPills">
+    <button class="nav-pill" onclick="navTo('sec-ingreso')">Ingreso</button>
+    <button class="nav-pill" onclick="navTo('sec-musica')">Música</button>
+    <button class="nav-pill" onclick="navTo('sec-procesion')">Procesión</button>
+    <button class="nav-pill" onclick="navTo('sec-votos')">Votos</button>
+    <button class="nav-pill" onclick="navTo('sec-recepcion')">Recepción</button>
+    <button class="nav-pill" onclick="navTo('sec-banquete')">Banquete</button>
+    <button class="nav-pill" onclick="navTo('sec-horaloca')">Hora Loca</button>
+    <button class="nav-pill" onclick="navTo('sec-cierre')">Cierre</button>
+  </div>
+  <div class="nav-progress" title="Progreso del programa">
+    <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9"/><circle class="prog" id="progCircle" cx="18" cy="18" r="15.9"/></svg>
+    <span id="progPct">0%</span>
+  </div>
+</nav>
+
+<main class="main">
+  <!-- CEREMONIA -->
+  <div class="section-hdr"><div class="section-hdr-line"></div><div class="section-hdr-inner"><i class="fa-solid fa-church"></i><span>Ceremonia</span></div><div class="section-hdr-line r"></div></div>
+  <div class="section-time">4:00 PM — 6:05 PM</div>
+  <div class="timeline">
+    <div class="ev-card" id="sec-ingreso"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 4:00<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Apertura e Ingreso al Local</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-location-dot"></i> Salón de Eventos</div></div></div></div></div>
+    <div class="ev-card" id="sec-musica"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="music-badge"><i class="fa-solid fa-music"></i> Música en Vivo</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 4:30<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Ambientación Musical Pre-Ceremonia</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band</div></div><div class="ev-note"><i class="fa-solid fa-violin"></i> Música instrumental en vivo: piano y saxofón</div></div></div></div>
+    <div class="ev-card" id="sec-procesion"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 5:00<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Inicio de la Presentación Ceremonial</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-user-tie"></i> Cyndi &amp; Adrian — Maestros de Ceremonia</div></div><button class="toggle-sub" data-target="procesion"><div class="toggle-sub-icon"><i class="fa-solid fa-chevron-down"></i></div><span>Ver desfile de ingreso — 9 momentos</span></button><div class="sub-list" id="procesion">
+      <div class="ev-card sub"><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 5:05<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Ingreso del Novio</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-user"></i> Joel acompañado de su mamá</div></div></div></div></div>
+      <div class="ev-card sub"><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Ingreso de los Padrinos del Novio</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-users"></i> Hendrijk &amp; Lucia</div></div></div></div></div>
+      <div class="ev-card sub"><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Ingreso de los Padrinos de la Novia</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-users"></i> Ciro &amp; Sara</div></div></div></div></div>
+      <div class="ev-card sub"><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Ingreso de los Padres de los Novios</div></div></div></div>
+      <div class="ev-card sub"><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Ingreso de la Biblia Sagrada</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-book-bible"></i> Stefanny</div></div></div></div></div>
+      <div class="ev-card sub"><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Ingreso de los Aros Matrimoniales</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-ring"></i> Esther Sinche</div></div></div></div></div>
+      <div class="ev-card sub"><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Ingreso de las Damitas</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-child-reaching"></i> Esther &amp; Alicia</div></div></div></div></div>
+      <div class="ev-card sub"><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Ingreso de los Caballeros</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-people-group"></i> Abel &amp; Fernando</div></div></div></div></div>
+      <div class="ev-card sub highlight"><div class="important-badge"><i class="fa-solid fa-star"></i> Momento Especial</div><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> ✦ Gran Momento</div><div class="ev-body"><div class="ev-title">✦ Ingreso de la Novia</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-heart"></i> Lucero acompañada de su papá</div></div></div></div></div>
+    </div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 5:15<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Presentación del Pastor Oficiante</div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Sermón — Libro de Eclesiastés</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-person-praying"></i> Pastor Hendrijk</div></div></div></div></div>
+    <div class="ev-card highlight" id="sec-votos"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="important-badge"><i class="fa-solid fa-heart"></i> Momento Principal</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 5:35<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">✦ Intercambio de Votos</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-heart"></i> Joel &amp; Lucero</div></div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 5:45<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Acto Simbólico de Unión Conyugal</div></div></div></div>
+    <div class="ev-card highlight"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="important-badge"><i class="fa-solid fa-star"></i> Momento Principal</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 5:55<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">✦ El Beso de los Esposos</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-heart"></i> Joel &amp; Lucero</div></div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 6:00<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Salida Triunfal de los Esposos</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-user-tie"></i> Conducido por Cyndi &amp; Adrian</div></div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Apertura de la Barra de Bebidas y Mesa de Quesos</div><div class="ev-note"><i class="fa-solid fa-cheese"></i> Se invita a los presentes a degustar la mesa de quesos y la barra de refrescos.</div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 6:05<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Sesión Fotográfica de los Recién Casados</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-camera"></i> Carlos Smith</div></div></div></div></div>
+  </div>
+  <div style="text-align:center;margin:44px 0;color:var(--gold);letter-spacing:12px;font-size:13px">✦ &nbsp; ✦ &nbsp; ✦</div>
+  <!-- RECEPCIÓN -->
+  <div class="section-hdr"><div class="section-hdr-line"></div><div class="section-hdr-inner" style="background:var(--burg-grad)"><i class="fa-solid fa-champagne-glasses"></i><span>Recepción</span></div><div class="section-hdr-line r"></div></div>
+  <div class="section-time">6:07 PM — 11:00 PM</div>
+  <div class="timeline">
+    <div class="ev-card has-playlist" id="sec-recepcion" data-block="dj1"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="music-badge"><i class="fa-solid fa-compact-disc"></i> DJ en Vivo</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 6:07<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Ambientación Musical de Bienvenida — DJ</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-compact-disc"></i> DJ — Selección Musical Bloque 1</div></div><div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Playlist · <span id="count-dj1">0</span> canciones</div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 6:30<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Apertura Oficial de la Recepción</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-user-tie"></i> Maestro de Ceremonias</div></div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 6:35<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Gran Ingreso de los Esposos al Salón</div></div></div></div>
+    <div class="ev-card highlight"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="important-badge"><i class="fa-solid fa-heart"></i> Momento Principal</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 6:40<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">✦ Primer Baile de los Casados — Vals</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-heart"></i> Joel &amp; Lucero</div></div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Presentación de Padres y Padrinos</div><div class="ev-note"><i class="fa-solid fa-users"></i> Padrinos del novio: Hendrijk &amp; Lucia · Padrinos de la novia: Ciro &amp; Sara</div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time dash"><i class="fa-regular fa-clock"></i> Seguido</div><div class="ev-body"><div class="ev-title">Palabras de Familiares, Amigos y Esposos</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-microphone"></i> Según lista · Joel &amp; Lucero</div></div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 6:55<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Brindis de Honor</div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 7:00<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Vals Familiar</div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 7:10<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Sesión Fotográfica con las Mesas de Invitados</div><div class="ev-note"><i class="fa-solid fa-camera"></i> Dinámica especial al ritmo de una selección del DJ</div></div></div></div>
+    <div class="ev-card has-playlist" id="sec-banquete" data-block="dj2"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="music-badge"><i class="fa-solid fa-compact-disc"></i> DJ en Vivo</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 7:30<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">El Banquete — Servicio de Cena</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-utensils"></i> Servicio de cena para todos los invitados</div><div class="ev-meta-item"><i class="fa-solid fa-compact-disc"></i> DJ — Selección Musical Bloque 2</div></div><div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Playlist · <span id="count-dj2">0</span> canciones</div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 8:00<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Baile Típico I — Huaylas</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-person-dancing"></i> Jimena · Carnaval Perú Producciones</div></div></div></div></div>
+    <div class="ev-card has-playlist" data-block="orq1"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="music-badge"><i class="fa-solid fa-music"></i> Orquesta en Vivo</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 8:05<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Orquesta en Vivo — Bloque 1</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band</div><div class="ev-meta-item"><i class="fa-solid fa-user"></i> Coordinación: Isaac</div></div><div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Lista · <span id="count-orq1">0</span> canciones</div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 8:20<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Baile Típico II — Marinera Norteña</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-person-dancing"></i> Jimena · Carnaval Perú Producciones</div></div></div></div></div>
+    <div class="ev-card highlight"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="important-badge"><i class="fa-solid fa-star"></i> Sorpresa Especial</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 8:30<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">✦ Canción Sorpresa del Novio &amp; Vals Sorpresa</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-guitar"></i> Joel &amp; Lucero · N3 Band</div><div class="ev-meta-item"><i class="fa-solid fa-user"></i> Liam (coordinación)</div></div><div class="ev-note"><i class="fa-solid fa-star"></i> Joel comienza tocando en solitario, luego invita a Lucero a unirse al vals sorpresa.</div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 8:40<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Baile Típico III — Festejo</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-person-dancing"></i> Jimena · Carnaval Perú Producciones</div></div><div class="ev-note"><i class="fa-solid fa-note-sticky"></i> Con vestido largo</div></div></div></div>
+    <div class="ev-card has-playlist" data-block="orq2"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="music-badge"><i class="fa-solid fa-music"></i> Orquesta en Vivo</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 8:45<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Orquesta en Vivo — Bloque 2</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band</div><div class="ev-meta-item"><i class="fa-solid fa-user"></i> Coordinación: Isaac</div></div><div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Lista · <span id="count-orq2">0</span> canciones</div></div></div></div>
+    <div class="ev-card highlight"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="important-badge"><i class="fa-solid fa-heart"></i> Momento Principal</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 9:00<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">✦ Baile Sorpresa de los Esposos</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-heart"></i> Joel &amp; Lucero · N3 Band · Isaac</div></div><div class="ev-note"><i class="fa-solid fa-music"></i> Al ritmo de "Qué Suerte Tenerte" — Fonseca</div></div></div></div>
+    <div class="ev-card highlight has-playlist" id="sec-horaloca" data-block="djhl"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="important-badge"><i class="fa-solid fa-fire"></i> ¡La Fiesta!</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 9:05<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">✦ ¡Hora Loca!</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-star"></i> Jimena · Carnaval Perú Producciones</div><div class="ev-meta-item"><i class="fa-solid fa-compact-disc"></i> DJ Mix Especial</div></div><div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Playlist · <span id="count-djhl">0</span> canciones</div></div></div></div>
+    <div class="ev-card"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 9:45<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Lanzamiento del Bouquet y la Billetera</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band · Isaac</div></div><div class="ev-note"><i class="fa-solid fa-music"></i> Al ritmo de "El Ritmo de Tu Corazón"</div></div></div></div>
+    <div class="ev-card has-playlist" data-block="orq3"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="music-badge"><i class="fa-solid fa-music"></i> Orquesta en Vivo</div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 10:00<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Orquesta en Vivo — Bloque Final</div><div class="ev-meta"><div class="ev-meta-item"><i class="fa-solid fa-music"></i> N3 Band</div><div class="ev-meta-item"><i class="fa-solid fa-user"></i> Coordinación: Isaac</div></div><div class="song-count-chip"><i class="fa-solid fa-list-music"></i> Lista · <span id="count-orq3">0</span> canciones</div></div></div></div>
+    <div class="ev-card" id="sec-cierre"><div class="nav-pointer"><i class="fa-solid fa-chevron-right"></i></div><div class="ev-row"><div class="ev-time"><i class="fa-regular fa-clock"></i> 11:00<span class="ev-ampm">PM</span></div><div class="ev-body"><div class="ev-title">Palabras de Agradecimiento y Cierre de la Celebración</div></div></div></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-orn">✦ &nbsp; ✦ &nbsp; ✦</div>
+  <div class="footer-names">Joel <em>&amp;</em> Lucero</div>
+  <div class="footer-verse">"Este es el día que hizo el Señor; nos gozaremos y alegraremos en él."</div>
+  <div class="footer-ref">Salmos 118:24</div>
+  <div class="footer-orn" style="font-size:11px;letter-spacing:6px">✦ &nbsp; ✦ &nbsp; ✦</div>
+</footer>
+
+<!-- POPUP UNIFICADO -->
+<div class="overlay" id="popupOverlay">
+  <div class="popup" id="popup">
+    <div class="popup-handle"></div>
+    <div id="viewDetail" class="popup-view">
+      <div class="popup-head" id="detailHead"><div class="popup-head-content"><div class="popup-badge-wrap" id="detailBadge"></div><div class="popup-title" id="detailTitle"></div><div class="popup-time-label" id="detailTime"></div></div><button class="popup-close" id="btnClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="popup-body"><div class="detail-meta-list" id="detailMeta"></div><div id="detailNoteWrap"></div><button class="btn-open-playlist" id="btnOpenPlaylist" style="display:none"><div class="btn-open-playlist-icon"><i class="fa-solid fa-list-music"></i></div><div class="btn-open-playlist-label"><strong>Ver / Editar Playlist</strong><span id="playlistBlockLabel"></span></div><span class="btn-open-playlist-badge" id="playlistCount">0</span><i class="fa-solid fa-chevron-right btn-open-playlist-arrow"></i></button></div>
+    </div>
+    <div id="viewSongs" class="popup-view" style="display:none">
+      <div class="popup-head popup-head--songs"><button class="btn-back" id="btnBack" aria-label="Volver"><i class="fa-solid fa-chevron-left"></i></button><div class="popup-head-content" style="text-align:center"><div class="popup-title" id="songsTitle"></div><div class="popup-sub-label" id="songsSub"></div></div><button class="popup-close" id="btnCloseSongs" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="popup-body"><ul class="song-list" id="songList"></ul><div class="popup-actions"><button class="btn-add-song" id="btnAddSong"><i class="fa-solid fa-plus"></i> Agregar</button><button class="btn-save" id="btnSave"><i class="fa-solid fa-floppy-disk"></i> Guardar</button></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="fab-wrap"><div class="toc-panel" id="tocPanel"><div class="toc-head"><div class="toc-head-title">Índice del Programa</div><div class="toc-head-sub">Joel &amp; Lucero · 25 Abril 2026</div></div><div class="toc-sections" id="tocList"></div></div><button class="fab" id="fab" aria-label="Abrir índice"><div class="fab-icon-stack"><div class="fab-line fab-line-1"></div><div class="fab-line fab-line-2"></div><div class="fab-line fab-line-3"></div></div></button></div>
+<div class="toast" id="toast" role="status"><i class="fa-solid fa-circle-check"></i><span id="toastMsg"></span></div>
+
+<script>
+// ==================== DATA ====================
+const STORAGE_KEY = 'jl_boda_2026_v2';
+let songData = {};
+try { songData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) {}
+
+const blocks = {
+  dj1:  { title: 'DJ — Bloque 1',          sub: 'Música de Bienvenida · 6:07 PM' },
+  dj2:  { title: 'DJ — Bloque 2',          sub: 'Durante El Banquete · 7:30 PM' },
+  djhl: { title: 'DJ — Mix Hora Loca',     sub: '¡La Fiesta! · 9:05 PM' },
+  orq1: { title: 'N3 Band — Bloque 1',     sub: 'Primer Bloque Orquesta · 8:05 PM' },
+  orq2: { title: 'N3 Band — Bloque 2',     sub: 'Segundo Bloque Orquesta · 8:45 PM' },
+  orq3: { title: 'N3 Band — Bloque Final', sub: 'Gran Cierre Orquesta · 10:00 PM' },
+};
+
+const tocData = [
+  { label: 'I. Ceremonia', items: [
+    { id: 'sec-ingreso',   time: '4:00 PM',  name: 'Apertura e Ingreso al Local',            important: false },
+    { id: 'sec-musica',    time: '4:30 PM',  name: 'Ambientación Musical Pre-Ceremonia',     important: false },
+    { id: 'sec-procesion', time: '5:00 PM',  name: 'Inicio de la Presentación Ceremonial',  important: false },
+    { id: null,            time: '5:15 PM',  name: 'Presentación del Pastor',               important: false },
+    { id: 'sec-votos',     time: '5:35 PM',  name: '✦ Intercambio de Votos',                important: true  },
+    { id: null,            time: '5:45 PM',  name: 'Acto Simbólico de Unión',               important: false },
+    { id: null,            time: '5:55 PM',  name: '✦ El Beso de los Esposos',              important: true  },
+    { id: null,            time: '6:00 PM',  name: 'Salida Triunfal de los Esposos',        important: false },
+    { id: null,            time: '6:05 PM',  name: 'Sesión Fotográfica',                    important: false },
+  ]},
+  { label: 'II. Recepción', items: [
+    { id: 'sec-recepcion', time: '6:07 PM',  name: 'Ambientación Musical — DJ Bloque 1',    important: false },
+    { id: null,            time: '6:30 PM',  name: 'Apertura Oficial de la Recepción',      important: false },
+    { id: null,            time: '6:35 PM',  name: 'Gran Ingreso de los Esposos',           important: false },
+    { id: null,            time: '6:40 PM',  name: '✦ Primer Baile — Vals',                 important: true  },
+    { id: null,            time: '6:55 PM',  name: 'Brindis de Honor',                      important: false },
+    { id: 'sec-banquete',  time: '7:30 PM',  name: 'El Banquete · DJ Bloque 2',            important: false },
+    { id: null,            time: '8:05 PM',  name: 'Orquesta en Vivo — Bloque 1',          important: false },
+    { id: null,            time: '8:30 PM',  name: '✦ Canción & Vals Sorpresa del Novio',   important: true  },
+    { id: null,            time: '8:45 PM',  name: 'Orquesta en Vivo — Bloque 2',          important: false },
+    { id: null,            time: '9:00 PM',  name: '✦ Baile Sorpresa de los Esposos',       important: true  },
+    { id: 'sec-horaloca',  time: '9:05 PM',  name: '✦ ¡Hora Loca!',                         important: true  },
+    { id: null,            time: '9:45 PM',  name: 'Lanzamiento del Bouquet',               important: false },
+    { id: null,            time: '10:00 PM', name: 'Orquesta en Vivo — Bloque Final',       important: false },
+    { id: 'sec-cierre',    time: '11:00 PM', name: 'Cierre y Agradecimientos',             important: false },
+  ]},
+];
+
+// ==================== HELPER ====================
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function showToast(msg) { const $t = $('#toast'); $('#toastMsg').text(msg); $t.addClass('show'); setTimeout(()=>$t.removeClass('show'),3200); }
+function updateCounts() { $.each(blocks, (id)=>{ let cnt = (songData[id]||[]).filter(s=>s.trim()).length; $('#count-'+id).text(cnt); }); }
+
+// ==================== POPUP LOGIC ====================
+let currentBlock = null, _scrollY = 0;
+function lockScroll() { _scrollY = window.scrollY; $('body').css({overflow:'hidden',position:'fixed',top:-_scrollY+'px',width:'100%'}); }
+function unlockScroll() { $('body').css({overflow:'',position:'',top:'',width:''}); window.scrollTo(0,_scrollY); }
+
+function openDetail($card) {
+  if($card.hasClass('sub')) return;
+  currentBlock = $card.data('block') || null;
+  let title = $card.find('.ev-title').first().text().trim();
+  let timeText = $card.find('.ev-time').first().text().replace(/\s+/g,' ').trim();
+  let isHighlight = $card.hasClass('highlight');
+  let $musicBadge = $card.find('.music-badge').first();
+  let $impBadge = $card.find('.important-badge').first();
+  let badgeHtml = $impBadge.length ? $impBadge.prop('outerHTML') : ($musicBadge.length ? $musicBadge.prop('outerHTML') : '');
+  let metaHtml = $card.find('.ev-meta-item').map(function(){ let icon = $(this).find('i').prop('outerHTML')||''; return `<div class="detail-meta-item">${icon}<span>${$(this).text().trim()}</span></div>`; }).get().join('');
+  let noteHtml = $card.find('.ev-note').first().length ? $card.find('.ev-note').first().prop('outerHTML').replace('ev-note','detail-note') : '';
+  $('#detailBadge').html(badgeHtml);
+  $('#detailTitle').text(title);
+  $('#detailTime').text(timeText);
+  $('#detailMeta').html(metaHtml || '<p style="color:var(--muted);font-size:13px;">Sin información adicional.</p>');
+  $('#detailNoteWrap').html(noteHtml);
+  let $head = $('#detailHead');
+  $head.removeClass('popup-head--gold popup-head--burg popup-head--plain');
+  if(isHighlight) $head.addClass('popup-head--burg');
+  else if($musicBadge.length) $head.addClass('popup-head--gold');
+  else $head.addClass('popup-head--plain');
+  if(currentBlock) { let cnt = (songData[currentBlock]||[]).filter(s=>s.trim()).length; $('#playlistCount').text(cnt); $('#playlistBlockLabel').text(blocks[currentBlock]?.sub||''); $('#btnOpenPlaylist').show(); }
+  else $('#btnOpenPlaylist').hide();
+  showView('detail'); openOverlay();
+}
+function openSongsView() { if(!currentBlock) return; let m=blocks[currentBlock]; $('#songsTitle').text(m.title); $('#songsSub').text(m.sub); renderSongList(); showView('songs'); }
+function showView(mode) { if(mode==='detail') { $('#viewDetail').show(); $('#viewSongs').hide(); } else { $('#viewDetail').hide(); $('#viewSongs').show(); $('#popupOverlay .popup-body').last().scrollTop(0); } }
+function openOverlay() { $('#popupOverlay').addClass('open'); lockScroll(); }
+function closePopup() { $('#popupOverlay').removeClass('open'); unlockScroll(); setTimeout(()=>showView('detail'),420); }
+
+function renderSongList() {
+  let $list = $('#songList');
+  let songs = songData[currentBlock] || [];
+  if(!songs.length) { $list.html('<div class="empty-songs"><i class="fa-solid fa-music"></i>Aún no hay canciones.<br>¡Agrega la primera!</div>'); return; }
+  $list.html(songs.map((s,i)=>`<li class="song-item"><div class="song-num">${i+1}</div><input class="song-input" value="${esc(s)}" placeholder="Nombre — Artista" data-idx="${i}"><button class="song-del" data-idx="${i}"><i class="fa-solid fa-trash-can"></i></button></li>`).join(''));
+}
+function syncInputs() { $('#songList .song-input').each(function(){ let i=$(this).data('idx'); if(songData[currentBlock] && i<songData[currentBlock].length) songData[currentBlock][i]=$(this).val(); }); }
+function addSong() { syncInputs(); if(!songData[currentBlock]) songData[currentBlock]=[]; songData[currentBlock].push(''); renderSongList(); setTimeout(()=>$('#songList .song-input').last().focus(),60); }
+function deleteSong(i) { syncInputs(); songData[currentBlock].splice(i,1); renderSongList(); }
+function saveSongs() { syncInputs(); if(songData[currentBlock]) songData[currentBlock]=songData[currentBlock].filter(s=>s.trim()); try{localStorage.setItem(STORAGE_KEY,JSON.stringify(songData));}catch(e){} updateCounts(); showToast('✦ Lista guardada correctamente'); closePopup(); }
+
+// ==================== NAV & PROGRESS ====================
+const navTargetIds = ['sec-ingreso','sec-musica','sec-procesion','sec-votos','sec-recepcion','sec-banquete','sec-horaloca','sec-cierre'];
+function updateProgress() {
+  let docH=document.documentElement.scrollHeight-window.innerHeight;
+  let pct=docH>0?Math.min(100,Math.round(window.scrollY/docH*100)):0;
+  $('#top-bar').css('width',pct+'%');
+  let circLen=2*Math.PI*15.9;
+  $('#progCircle')[0].style.strokeDashoffset=circLen-(circLen*pct/100);
+  $('#progPct').text(pct+'%');
+  $('#mainNav').toggleClass('scrolled',window.scrollY>60);
+  let active=0;
+  navTargetIds.forEach((id,i)=>{ let el=document.getElementById(id); if(el && el.getBoundingClientRect().top<110) active=i; });
+  $('.nav-pill').each(function(i){ $(this).toggleClass('active',i===active); });
+}
+window.navTo = function(id) { let $el=$('#'+id); if(!$el.length) return; let top=$el.offset().top-$('#mainNav').outerHeight()-14; $('html,body').animate({scrollTop:top},420); };
+
+// ==================== TOC ====================
+let allMainCards=[], tocOpen=false;
+function toggleToc() { tocOpen ? closeToc() : openToc(); }
+function openToc() { tocOpen=true; $('#tocPanel').addClass('open'); $('#fab').addClass('open'); }
+function closeToc() { tocOpen=false; $('#tocPanel').removeClass('open'); $('#fab').removeClass('open'); }
+function scrollToCard(idx) { let card=allMainCards[idx]; if(!card) return; closeToc(); let top=$(card).offset().top-$('#mainNav').outerHeight()-18; $('html,body').animate({scrollTop:top},420,()=>{ $(card).addClass('spotlit'); setTimeout(()=>$(card).removeClass('spotlit'),2400); }); }
+function buildToc() {
+  let html='', cardCursor=0;
+  tocData.forEach(section=>{ html+=`<div class="toc-section-label">${section.label}</div>`; section.items.forEach(item=>{ let impClass=item.important?' is-important':''; html+=`<div class="toc-item${impClass}" data-idx="${cardCursor++}"><div class="toc-dot"></div><div class="toc-item-name">${item.name}</div><div class="toc-time-badge">${item.time}</div></div>`; }); });
+  $('#tocList').html(html);
+  $('#tocList').on('click','.toc-item',function(){ scrollToCard(+$(this).data('idx')); });
+}
+
+// ==================== PARTICLES ====================
+(function(){ let canvas=document.getElementById('particles'), ctx=canvas.getContext('2d'), W,H,pts=[]; function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=document.documentElement.scrollHeight; } function init(){ pts=[]; let n=Math.floor(W*H/20000); for(let i=0;i<n;i++){ pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+0.3,a:Math.random()*Math.PI*2,sp:Math.random()*.003+.001,op:Math.random()*.45+.15,c:Math.random()>.65?'#B68B40':'#8B3A3A'}); } } function draw(){ ctx.clearRect(0,0,W,H); pts.forEach(p=>{ p.a+=p.sp; p.x+=Math.sin(p.a)*.35; p.y+=Math.cos(p.a*.7)*.25; if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0; ctx.save(); ctx.globalAlpha=p.op*(0.65+0.35*Math.sin(p.a*2)); ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); ctx.restore(); }); requestAnimationFrame(draw); } resize(); init(); draw(); window.addEventListener('resize',()=>{ resize(); init(); }); })();
+
+// ==================== APP INIT ====================
+$(function(){
+  // reveal cards
+  let obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ $(e.target).addClass('visible'); obs.unobserve(e.target); } }); },{threshold:0.07});
+  $('.ev-card').each(function(i){ this.style.transitionDelay=(i%5)*0.05+'s'; obs.observe(this); });
+  // toggle sub-list
+  $(document).on('click','.toggle-sub',function(e){ e.stopPropagation(); let $btn=$(this), id=$btn.data('target'), $list=$('#'+id), $icon=$btn.find('.toggle-sub-icon i'); $list.toggleClass('open'); if($list.hasClass('open')){ $icon.attr('class','fa-solid fa-chevron-up'); $btn.find('span').text('Ocultar desfile de ingreso'); } else { $icon.attr('class','fa-solid fa-chevron-down'); $btn.find('span').text('Ver desfile de ingreso — 9 momentos'); } });
+  // popup events
+  $('#popupOverlay').on('click',function(e){ if($(e.target).is('#popupOverlay')) closePopup(); });
+  $(document).on('click','#btnClose, #btnCloseSongs', closePopup);
+  $('#btnBack').on('click',()=>showView('detail'));
+  $('#btnOpenPlaylist').on('click',openSongsView);
+  $('#btnAddSong').on('click',addSong);
+  $('#btnSave').on('click',saveSongs);
+  $(document).on('input','#songList .song-input',function(){ let i=$(this).data('idx'); if(songData[currentBlock]) songData[currentBlock][i]=$(this).val(); });
+  $(document).on('keydown','#songList .song-input',function(e){ if(e.key==='Enter'){ e.preventDefault(); addSong(); } });
+  $(document).on('click','#songList .song-del',function(){ deleteSong(+$(this).data('idx')); });
+  $(document).on('click','.ev-card:not(.sub)',function(e){ if($(e.target).closest('.toggle-sub, .sub-list').length) return; openDetail($(this)); });
+  $(document).on('click','.ev-card',function(e){ let $card=$(this), offset=$card.offset(), x=e.pageX-offset.left, y=e.pageY-offset.top, size=Math.max($card.outerWidth(),$card.outerHeight())*2.5, $dot=$('<div class="ripple-dot">').css({left:x-size/2,top:y-size/2,width:size,height:size}); $card.append($dot); setTimeout(()=>$dot.remove(),600); });
+  $(document).on('keydown',function(e){ if(e.key==='Escape') closePopup(); });
+  // progress & toc
+  $(window).on('scroll',updateProgress); updateProgress();
+  $('#fab').on('click',toggleToc);
+  $(document).on('click',function(e){ if(tocOpen && !$(e.target).closest('.fab-wrap').length) closeToc(); });
+  allMainCards = $('.ev-card:not(.sub)').toArray();
+  buildToc();
+  updateCounts();
+});
+</script>
+</body>
+</html>
